@@ -91,123 +91,58 @@
         </aside>
 
         <!-- CONTENT TARAFI -->
-        <main class="flex-1 p-6 lg:p-10 min-h-[500px]">
+        <main class="flex-1 p-6 lg:p-10 min-h-[550px] flex flex-col justify-center items-center">
 
-            <!-- RO'YXATDAN O'TMAGAN HODISA BANNERI (AUTH GUARDIAN) -->
-            <div id="unauth-banner" class="hidden flex-col items-center justify-center py-20 text-center space-y-4">
-                <div
-                    class="w-16 h-16 rounded-full bg-red-600/10 border border-red-600/20 flex items-center justify-center text-red-500 text-2xl mb-2">
-                    <i class="fa-solid fa-user-lock"></i>
+            <!-- RO'YXATDAN O'TMAGAN HODISA BANNERI (TO'LIQ O'RTAGA JOYLASHGAN) -->
+            <div id="unauth-banner"
+                class="hidden w-full my-auto flex-col items-center justify-center text-center py-10">
+                <div class="max-w-md w-full mx-auto flex flex-col items-center justify-center space-y-6">
+
+                    <!-- Neon effektli Icon Box -->
+                    <div class="relative flex items-center justify-center">
+                        <div
+                            class="absolute -inset-1 bg-gradient-to-r from-red-600 to-amber-600 rounded-full blur-lg opacity-40 animate-pulse">
+                        </div>
+                        <div
+                            class="relative w-20 h-20 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-red-500 text-3xl shadow-2xl">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                    </div>
+
+                    <!-- Matnlar -->
+                    <div class="space-y-2 text-center">
+                        <h2 class="text-2xl font-extrabold text-white tracking-tight sm:text-3xl">
+                            Siz ro'yxatdan o'tmagansiz
+                        </h2>
+                        <p class="text-xs text-zinc-400 leading-relaxed max-w-sm mx-auto">
+                            Shaxsiy kabinetingizdan foydalanish, buyurtmalarni boshqarish va saqlangan mahsulotlarni
+                            ko'rish uchun tizimga kiring.
+                        </p>
+                    </div>
+
+                    <!-- Tugma -->
+                    <button onclick="openRegisterModal()"
+                        class="group relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold text-xs px-8 py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-red-600/25 hover:shadow-red-600/40 hover:-translate-y-0.5">
+                        <i
+                            class="fa-solid fa-right-to-bracket text-sm transition-transform group-hover:translate-x-0.5"></i>
+                        Ro'yxatdan o'tish
+                    </button>
+
+                    <!-- Kafolat belgilari -->
+                    <div
+                        class="flex items-center justify-center gap-6 pt-4 text-[11px] text-zinc-500 font-medium border-t border-zinc-900/80 w-full max-w-xs mx-auto">
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-lock text-red-500/80"></i> Xavfsiz
+                            tizim</span>
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-bolt text-amber-500/80"></i>
+                            Tezkor kirish</span>
+                    </div>
+
                 </div>
-                <h2 class="text-2xl font-bold text-white">Siz ro'yxatdan o'tmagansiz</h2>
-                <p class="text-xs text-zinc-400 max-w-sm">
-                    Shaxsiy kabinetingizdan foydalanish, buyurtmalar hamda saqlangan mahsulotlarni ko'rish uchun tizimda
-                    ro'yxatdan o'ting.
-                </p>
-                <button onclick="openRegisterModal()"
-                    class="bg-red-600 hover:bg-red-700 text-white font-semibold text-xs px-6 py-3 rounded-xl transition shadow-lg shadow-red-600/20">
-                    Ro'yxatdan o'tish
-                </button>
             </div>
 
-            <!-- AUTH BO'LGAN FOYDALANUVCHILAR UNCHUN KABINET -->
-            <div id="auth-content-area" class="space-y-6">
-
-                <!-- 1. ASOSIY TAB -->
-                <!-- 1. ASOSIY TAB (Foydalanuvchi ma'lumotlari) -->
-                <section id="tab-asosiy" class="tab-content hidden space-y-6">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-bold text-white">Foydalanuvchi ma'lumotlari</h2>
-                        <div class="flex items-center gap-3">
-                            <!-- Edit Tugmasi -->
-                            <button onclick="openEditModal()"
-                                class="flex items-center gap-2 bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 text-amber-400 font-semibold text-xs px-4 py-2 rounded-xl transition">
-                                <i class="fa-solid fa-pen-to-square"></i> Tahrirlash
-                            </button>
-                            <!-- Hisobni O'chirish Tugmasi -->
-                            <button onclick="deleteAccount()"
-                                class="flex items-center gap-2 bg-red-950/30 border border-red-900/50 hover:bg-red-600 hover:text-white text-red-500 font-semibold text-xs px-4 py-2 rounded-xl transition">
-                                <i class="fa-solid fa-trash-can"></i> Hisobni o'chirish
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Profil Card -->
-                    <div
-                        class="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6">
-                        <!-- Profil Rasmi -->
-                        <div
-                            class="relative w-24 h-24 rounded-2xl overflow-hidden border-2 border-amber-500/50 bg-zinc-800 shrink-0">
-                            <img id="profile-card-avatar" src="" alt="User Avatar" class="w-full h-full object-cover">
-                        </div>
-
-                        <!-- Ma'lumotlar Gridi -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
-                            <div class="bg-zinc-950/80 p-4 rounded-xl border border-zinc-800/80">
-                                <div class="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">Ism va
-                                    Familiya</div>
-                                <div id="profile-fullname" class="text-sm font-semibold text-white mt-1 capitalize">-
-                                </div>
-                            </div>
-
-                            <div class="bg-zinc-950/80 p-4 rounded-xl border border-zinc-800/80">
-                                <div class="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">Manzil</div>
-                                <div id="profile-address" class="text-sm font-semibold text-white mt-1 capitalize">-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- 2. BUYURTMALAR (SAVAT) TAB -->
-                <section id="tab-buyurtmalar" class="tab-content space-y-6">
-                    <div id="cart-container">
-                        <!-- JS dinamik yuklaydi -->
-                    </div>
-                </section>
-
-                <!-- 3. SAQLANGANLAR (LIKES) TAB -->
-                <section id="tab-saqlanganlar" class="tab-content hidden space-y-6">
-                    <h2 class="text-xl font-bold">Saqlangan mahsulotlar</h2>
-                    <div id="likes-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        <!-- JS dinamik yuklaydi -->
-                    </div>
-                </section>
-
-                <!-- 4. XABARLAR TAB -->
-                <section id="tab-xabarlar" class="tab-content hidden space-y-6">
-                    <h2 class="text-xl font-bold">Bildirishnomalar va Xabarlar</h2>
-
-                    <!-- Yetib kelgan mahsulot haqida maxsus kartochka -->
-                    <div
-                        class="bg-zinc-900/80 border border-green-500/30 rounded-2xl p-5 flex flex-col sm:flex-row items-center gap-4">
-                        <div
-                            class="w-12 h-12 rounded-full bg-green-500/10 text-green-400 flex items-center justify-center text-xl shrink-0">
-                            <i class="fa-solid fa-truck-ramp-box"></i>
-                        </div>
-                        <div class="flex-1 text-center sm:text-left">
-                            <div
-                                class="inline-block px-2 py-0.5 bg-green-500/20 text-green-400 text-[10px] font-bold rounded mb-1">
-                                Bitta mahsulotingiz yetib keldi!
-                            </div>
-                            <h4 class="text-sm font-semibold text-white">Premium Noise Cancelling Headphones - XM Series
-                            </h4>
-                            <p class="text-xs text-zinc-400 mt-0.5">Toshkent markaziy omborimizga muvaffaqiyatli yetib
-                                keldi va olib ketishingiz mumkin.</p>
-                        </div>
-                        <button
-                            class="bg-red-600 hover:bg-red-700 text-white text-xs font-semibold px-4 py-2 rounded-xl transition shrink-0">
-                            Olib ketish kodi
-                        </button>
-                    </div>
-                </section>
-
-                <!-- 5. SOZLAMALAR TAB -->
-                <section id="tab-sozlamalar" class="tab-content hidden space-y-6">
-                    <h2 class="text-xl font-bold">Hisob sozlamalari</h2>
-                    <p class="text-xs text-zinc-400">Bu yerda manzillar va xavfsizlik sozlamalarini o'zgartirishingiz
-                        mumkin.</p>
-                </section>
-
+            <!-- AUTH BO'LGAN FOYDALANUVCHILAR UCHUN KABINET (w-full qo'shildi) -->
+            <div id="auth-content-area" class="w-full space-y-6">
+                <!-- 1. ASOSIY TAB, 2. BUYURTMALAR... shu yerda qoladi -->
             </div>
 
         </main>
@@ -217,8 +152,6 @@
     <div id="register-modal"
         class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
         <div class="bg-zinc-950 border border-zinc-800 rounded-2xl w-full max-w-md p-6 space-y-5 relative shadow-2xl">
-
-            <!-- Modal Yopish Tugmasi -->
             <button onclick="closeRegisterModal()"
                 class="absolute top-4 right-4 text-zinc-500 hover:text-white text-sm">
                 <i class="fa-solid fa-xmark"></i>
@@ -229,7 +162,6 @@
                 <p class="text-xs text-zinc-400">Ma'lumotlaringizni kiriting va shaxsiy kabinetga ega bo'ling.</p>
             </div>
 
-            <!-- Form -->
             <form onsubmit="handleRegisterSubmit(event)" class="space-y-3">
                 <div>
                     <label class="block text-xs text-zinc-400 mb-1 font-medium">Ismingiz</label>
@@ -261,25 +193,13 @@
                     Saqlash va Kirish
                 </button>
             </form>
-
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="bg-[#0e0c0d] text-zinc-500 text-xs py-8 px-6 border-t border-zinc-900 mt-auto">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>© 2024 KARVON. Barcha huquqlar himoyalangan.</div>
-            <div class="flex gap-4">
-                <a href="#" class="hover:text-white">Maxfiylik siyosati</a>
-                <a href="#" class="hover:text-white">Foydalanish shartlari</a>
-            </div>
-        </div>
-    </footer>
     <!-- ================= TAHRIRLASH MODAL OYNA ================= -->
     <div id="edit-modal"
         class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
         <div class="bg-zinc-950 border border-zinc-800 rounded-2xl w-full max-w-md p-6 space-y-5 relative shadow-2xl">
-
             <button onclick="closeEditModal()" class="absolute top-4 right-4 text-zinc-500 hover:text-white text-sm">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -319,9 +239,20 @@
                     Saqlash
                 </button>
             </form>
-
         </div>
     </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#0e0c0d] text-zinc-500 text-xs py-8 px-6 border-t border-zinc-900 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>© 2024 KARVON. Barcha huquqlar himoyalangan.</div>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-white">Maxfiylik siyosati</a>
+                <a href="#" class="hover:text-white">Foydalanish shartlari</a>
+            </div>
+        </div>
+    </footer>
+
     <script src="../js/user.js"></script>
 </body>
 

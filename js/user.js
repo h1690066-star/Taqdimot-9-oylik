@@ -351,3 +351,66 @@ function initUserProfile() {
         if (authContentArea) authContentArea.classList.add("hidden");
     }
 }
+
+function initUserProfile() {
+    const user = getUserData();
+    const headerUserContainer = document.getElementById("header-user-container");
+    const unauthBanner = document.getElementById("unauth-banner");
+    const authContentArea = document.getElementById("auth-content-area");
+
+    const sidebarName = document.getElementById("sidebar-user-name");
+    const sidebarStatus = document.getElementById("sidebar-user-status");
+
+    const profileFullname = document.getElementById("profile-fullname");
+    const profileAddress = document.getElementById("profile-address");
+    const profileCardAvatar = document.getElementById("profile-card-avatar");
+
+    if (user) {
+        // ---- RO'YXATDAN O'TGAN BO'LSA ----
+        if (headerUserContainer) {
+            headerUserContainer.innerHTML = `
+                <a href="user.html" class="flex items-center gap-2 hover:opacity-80 transition group">
+                    <img src="${user.avatar}" alt="${user.firstName}" class="w-7 h-7 rounded-full object-cover border border-amber-500">
+                    <span class="text-xs font-semibold text-zinc-200 group-hover:text-white hidden sm:inline">${user.firstName}</span>
+                </a>
+            `;
+        }
+
+        if (sidebarName) sidebarName.textContent = `${user.firstName} ${user.lastName}`;
+        if (sidebarStatus) sidebarStatus.textContent = "Premium xaridor";
+
+        if (profileFullname) profileFullname.textContent = `${user.firstName} ${user.lastName}`;
+        if (profileAddress) profileAddress.textContent = user.address;
+        if (profileCardAvatar) profileCardAvatar.src = user.avatar;
+
+        // Bannerni yashirish, kontentni ko'rsatish
+        if (unauthBanner) {
+            unauthBanner.classList.add("hidden");
+            unauthBanner.classList.remove("flex");
+        }
+        if (authContentArea) authContentArea.classList.remove("hidden");
+
+        renderUserCart();
+        renderUserLikes();
+
+    } else {
+        // ---- RO'YXATDAN O'TMAGAN BO'LSA ----
+        if (headerUserContainer) {
+            headerUserContainer.innerHTML = `
+                <button onclick="openRegisterModal()" class="bg-red-600 hover:bg-red-700 text-white font-semibold text-xs px-3 py-1.5 rounded-lg transition">
+                    Kirish
+                </button>
+            `;
+        }
+
+        if (sidebarName) sidebarName.textContent = "Xush kelibsiz";
+        if (sidebarStatus) sidebarStatus.textContent = "Mehmon";
+
+        // Bannerni o'rtaga flex qilib chiqarish, kontentni yashirish
+        if (unauthBanner) {
+            unauthBanner.classList.remove("hidden");
+            unauthBanner.classList.add("flex");
+        }
+        if (authContentArea) authContentArea.classList.add("hidden");
+    }
+}

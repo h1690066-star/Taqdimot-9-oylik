@@ -251,7 +251,6 @@ function updateHomeHeader() {
     if (!headerUserContainer) return;
 
     if (userData && userData.firstName) {
-        // RO'YXATDAN O'TGAN BO'LSA
         const userAvatar = userData.avatar || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&q=80";
 
         headerUserContainer.innerHTML = `
@@ -261,7 +260,6 @@ function updateHomeHeader() {
             </a>
         `;
     } else {
-        // RO'YXATDAN O'TMAGAN BO'LSA
         headerUserContainer.innerHTML = `
             <a href="./pages/user.html">
                 <button class="bg-red-600 hover:bg-red-700 text-white font-semibold text-sm px-4 py-1.5 rounded-lg transition">
@@ -272,7 +270,6 @@ function updateHomeHeader() {
     }
 }
 
-// Sahifa yuklanganda ishga tushirish
 document.addEventListener("DOMContentLoaded", () => {
     updateHomeHeader();
 });
