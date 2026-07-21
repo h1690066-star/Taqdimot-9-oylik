@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog - Simsuz Quloqchinlar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-[#0e0c0d] text-white font-sans antialiased min-h-screen">
+    <header class="border-b border-zinc-800 bg-[#0e0c0d]/90 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+
+            <!-- Logo -->
+            <div class="flex items-center gap-6">
+                <a href="/" class="text-xl font-extrabold tracking-wider text-white">KARVON</a>
+                <button
+                    class="hidden md:flex items-center gap-2 bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-lg text-sm text-zinc-300 hover:text-white">
+                    <i class="fa-solid fa-bars"></i> Kategoriyalar
+                </button>
+            </div>
+
+            <!-- Taobao / 1688 Switcher + Search Bar -->
+            <div class="flex-1 max-w-2xl flex items-center gap-2">
+
+                <!-- Platform Switcher Buttons -->
+                <div class="bg-zinc-900 p-1 rounded-xl border border-zinc-800 flex items-center">
+                    <button id="btn-taobao"
+                        class="px-3 py-1 text-xs font-semibold rounded-lg bg-red-600 text-white transition-all">
+                        Taobao
+                    </button>
+                    <button id="btn-1688"
+                        class="px-3 py-1 text-xs font-semibold rounded-lg text-zinc-400 hover:text-white transition-all">
+                        1688
+                    </button>
+                </div>
+
+                <!-- Search Input with Image & Voice Search -->
+                <div class="relative flex-1">
+                    <input type="text" id="search-input" placeholder="Mahsulot yoki do'kon qidirish..."
+                        class="w-full bg-zinc-900 border border-zinc-800 rounded-xl py-2 pl-9 pr-20 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition">
+                    <i
+                        class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-xs"></i>
+
+                    <!-- Tools (Camera & Mic Icons) -->
+                    <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2 text-zinc-400">
+                        <!-- Voice Search Button -->
+                        <button id="voice-search-btn" title="Ovozli qidiruv" class="hover:text-red-500 transition">
+                            <i class="fa-solid fa-microphone"></i>
+                        </button>
+                        <!-- Image Search Button -->
+                        <label for="image-upload" title="Rasm bilan qidirish"
+                            class="cursor-pointer hover:text-red-500 transition">
+                            <i class="fa-solid fa-camera"></i>
+                        </label>
+                        <input type="file" id="image-upload" accept="image/*" class="hidden">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Action Icons (Likes, Cart, Login) -->
+            <!-- Action Icons (Likes, Cart, User Profile / Login) -->
+            <div class="flex items-center gap-4">
+                <!-- Like Badge Icon -->
+                <div class="relative cursor-pointer hover:text-red-500 transition">
+                    <i class="fa-regular fa-heart text-xl"></i>
+                    <span id="like-count"
+                        class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                        0
+                    </span>
+                </div>
+
+                <!-- Cart Icon -->
+                <div class="relative cursor-pointer hover:text-red-500 transition">
+                    <i class="fa-solid fa-bag-shopping text-xl"></i>
+                    <span
+                        class="absolute -top-2 -right-2 bg-yellow-500 text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                        0
+                    </span>
+                </div>
+
+                <!-- DYNAMIC USER PROFILE / LOGIN CONTAINER -->
+                <div id="header-user-container">
+                    <!-- JS avtorizatsiyaga qarab ushbu joyga rasm va ismni yoki Kirish tugmasini qo'yadi -->
+                </div>
+            </div>
+
+        </div>
+    </header>
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+
+            <!-- ================= SIDEBAR FILTERLAR ================= -->
+            <aside class="space-y-8 bg-zinc-950/40 p-5 rounded-2xl border border-zinc-900 h-fit">
+
+                <div class="flex justify-between items-center">
+                    <h2 class="text-sm font-bold tracking-wider uppercase text-amber-500">FILTERLAR</h2>
+                    <button id="reset-filters" class="text-[11px] text-zinc-500 hover:text-white underline transition">
+                        Filtrni tozalash
+                    </button>
+                </div>
+
+                <!-- 1. MANBALAR BO'YICHA SARALASH -->
+                <div class="space-y-2">
+                    <span class="text-xs text-zinc-500 font-medium block mb-2">Manbalar bo'yicha saralash</span>
+
+                    <button onclick="filterByPlatform('all')"
+                        class="platform-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold bg-amber-500 text-black transition">
+                        <i class="fa-solid fa-layer-group"></i> Barchasi
+                    </button>
+
+                    <button onclick="filterByPlatform('Taobao')"
+                        class="platform-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-zinc-400 hover:bg-zinc-900 transition">
+                        <div
+                            class="w-5 h-5 rounded bg-orange-600 text-white text-[10px] flex items-center justify-center font-bold">
+                            淘</div>
+                        Taobao
+                    </button>
+
+                    <button onclick="filterByPlatform('Pinduoduo')"
+                        class="platform-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-zinc-400 hover:bg-zinc-900 transition">
+                        <div
+                            class="w-5 h-5 rounded bg-red-600 text-white text-[10px] flex items-center justify-center font-bold">
+                            拼</div>
+                        Pinduoduo
+                    </button>
+
+                    <button onclick="filterByPlatform('1688')"
+                        class="platform-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-zinc-400 hover:bg-zinc-900 transition">
+                        <div
+                            class="w-5 h-5 rounded bg-amber-600 text-white text-[9px] flex items-center justify-center font-bold">
+                            1688</div>
+                        1688
+                    </button>
+
+                    <button onclick="filterByPlatform('Alibaba')"
+                        class="platform-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-zinc-400 hover:bg-zinc-900 transition">
+                        <div
+                            class="w-5 h-5 rounded bg-blue-600 text-white text-[10px] flex items-center justify-center font-bold">
+                            A</div>
+                        Alibaba
+                    </button>
+                </div>
+
+                <div class="border-t border-zinc-900 pt-6"></div>
+
+                <!-- 2. YAKUNIY NARX FILTERI -->
+                <div class="space-y-3">
+                    <span class="text-xs text-zinc-500 font-medium block">Yakuniy narx (so'm)</span>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="min-price" placeholder="1 mln"
+                            class="w-1/2 bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500">
+                        <span class="text-zinc-600">-</span>
+                        <input type="number" id="max-price" placeholder="2 mln"
+                            class="w-1/2 bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+
+                <div class="border-t border-zinc-900 pt-6"></div>
+
+                <!-- 3. YETKAZIB BERISH (AVIA / GROUND) -->
+                <div class="space-y-3">
+                    <span class="text-xs text-zinc-500 font-medium block">Yetkazib berish</span>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button id="btn-avia" onclick="setShipping('AVIA')"
+                            class="py-2.5 rounded-xl text-xs font-bold border border-amber-500 bg-amber-500/10 text-amber-400 flex items-center justify-center gap-1.5 transition">
+                            <i class="fa-solid fa-plane"></i> AVIA (+7%)
+                        </button>
+                        <button id="btn-ground" onclick="setShipping('GROUND')"
+                            class="py-2.5 rounded-xl text-xs font-bold border border-zinc-800 bg-zinc-900 text-zinc-400 hover:text-white flex items-center justify-center gap-1.5 transition">
+                            <i class="fa-solid fa-truck"></i> GROUND (+4%)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="border-t border-zinc-900 pt-6"></div>
+
+                <!-- 4. ISHONCH DARAJASI (RATING YULDUZCHA) -->
+                <div class="space-y-3">
+                    <span class="text-xs text-zinc-500 font-medium block">Ishonch darajasi</span>
+                    <label class="flex items-center gap-2 cursor-pointer group">
+                        <input type="checkbox" id="rating-4plus" onchange="applyFilters()"
+                            class="w-4 h-4 accent-amber-500 rounded bg-zinc-900 border-zinc-800">
+                        <div class="flex items-center gap-1 text-amber-500 text-xs">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <span class="text-xs text-zinc-300 group-hover:text-white">4★ dan yuqori</span>
+                    </label>
+                </div>
+
+            </aside>
+
+            <!-- ================= MAHSULOTLAR TARAFI ================= -->
+            <main class="lg:col-span-3 space-y-6">
+
+                <!-- Sarlavha va Breadcrumb -->
+                <div>
+                    <div class="text-[11px] text-zinc-500 space-x-1 mb-2">
+                        <span>Bosh sahifa</span> <span>/</span> <span>Elektronika</span> <span>/</span> <span
+                            class="text-zinc-300">Quloqchinlar</span>
+                    </div>
+                    <h1 class="text-3xl font-extrabold tracking-tight">Simsiz quloqchinlar</h1>
+                    <p id="product-count-text" class="text-xs text-zinc-500 mt-1">12 480 ta mahsulot · 4 ta manbadan</p>
+                </div>
+
+                <!-- Tepadagi Tezkor Filter Pill'lar -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="filterByPlatform('all')"
+                        class="top-pill px-3 py-1.5 rounded-full text-xs font-semibold bg-red-600 text-white">Barcha
+                        manbalar</button>
+                    <button onclick="filterByPlatform('Taobao')"
+                        class="top-pill px-3 py-1.5 rounded-full text-xs font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white">Taobao
+                        4.2k</button>
+                    <button onclick="filterByPlatform('Pinduoduo')"
+                        class="top-pill px-3 py-1.5 rounded-full text-xs font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white">Pinduoduo
+                        3.8k</button>
+                    <button onclick="filterByPlatform('1688')"
+                        class="top-pill px-3 py-1.5 rounded-full text-xs font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white">1688
+                        2.1k</button>
+                    <button onclick="filterByPlatform('Alibaba')"
+                        class="top-pill px-3 py-1.5 rounded-full text-xs font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white">Alibaba
+                        2.4k</button>
+                </div>
+
+                <!-- Mahsulotlar Gridi -->
+                <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+                    <!-- JS dynamic render bo'ladi -->
+                </div>
+
+            </main>
+
+        </div>
+    </div>
+
+    <script src="../js/market.js"></script>
+    <script src="../js/mian.js"></script>
+</body>
+
+</html>
