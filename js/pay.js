@@ -1,5 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- 0. SAVATDAGI UMUMIY SUMMANI YUKLASH VA CHIQARISH ---
+    const totalPriceEl = document.getElementById('total-price');
+    const payBtnText = document.getElementById('pay-btn-text');
+
+    const checkoutTotal = parseInt(localStorage.getItem('karvon_checkout_total'), 10) || 0;
+    const checkoutCount = parseInt(localStorage.getItem('karvon_checkout_count'), 10) || 0;
+
+    if (totalPriceEl) {
+        // Promokod hisob-kitobi shu original summaga nisbatan ishlaydi
+        totalPriceEl.dataset.originalPrice = checkoutTotal;
+
+        const formattedTotal = new Intl.NumberFormat('fr-FR').format(checkoutTotal);
+        totalPriceEl.innerHTML = `${formattedTotal} <span class="text-base font-normal text-gray-400">so'm</span>`;
+    }
+
+    if (payBtnText) {
+        const formattedTotal = new Intl.NumberFormat('fr-FR').format(checkoutTotal);
+        payBtnText.innerText = `${formattedTotal} so'm to'lash`;
+    }
+
+    // Ixtiyoriy: mahsulotlar sonini ko'rsatadigan joy sahifada bo'lsa (id="checkout-items-count")
+    const itemsCountEl = document.getElementById('checkout-items-count');
+    if (itemsCountEl) {
+        itemsCountEl.textContent = `${checkoutCount} ta mahsulot`;
+    }
+
+
     // --- 1. TO'LOV USULI SELEKTORI (RADIO TOGGLE) ---
     const paymentItems = document.querySelectorAll('main section:first-child label');
 
@@ -32,9 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 2. PROMOKOD ("SARDOR" - 20% CHEGIRMA) ---
     const promoInput = document.getElementById('promo-code-input');
     const promoBtn = document.getElementById('apply-promo-btn');
-    const totalPriceEl = document.getElementById('total-price');
     const promoBadgeContainer = document.getElementById('promo-badge-container');
-    const payBtnText = document.getElementById('pay-btn-text');
 
     if (promoBtn && promoInput) {
         promoBtn.addEventListener('click', (e) => {
@@ -43,14 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (code === 'SARDOR') {
                 const originalPrice = parseFloat(totalPriceEl.dataset.originalPrice);
-                const discountAmount = originalPrice * 0.20; // 20% Chegirma summasi (852 400 so'm)
-                const finalPrice = originalPrice - discountAmount; // (3 409 600 so'm)
+                const discountAmount = originalPrice * 0.20;
+                const finalPrice = originalPrice - discountAmount;
 
-                // Formatlangan narxlar
                 const formattedDiscount = new Intl.NumberFormat('fr-FR').format(discountAmount);
                 const formattedFinal = new Intl.NumberFormat('fr-FR').format(finalPrice);
 
-                // Sovg'a qutichali blok HTML
                 const badgeHTML = `
           <div id="promo-badge" class="bg-card-border/40 rounded-xl p-3 flex justify-between items-center text-xs border border-brand/30 transition-all duration-500 transform opacity-0 -translate-y-2 scale-95 shadow-lg mb-2">
             <div class="flex items-center space-x-2">
@@ -66,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 promoBadgeContainer.innerHTML = badgeHTML;
 
-                // Paydo bo'lish animatsiyasini ishga tushirish
                 setTimeout(() => {
                     const badge = document.getElementById('promo-badge');
                     if (badge) {
@@ -75,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }, 50);
 
-                // Narxni o'zgartirish va animatsiya berish
                 totalPriceEl.classList.add('scale-105', 'text-emerald-400');
                 totalPriceEl.innerHTML = `${formattedFinal} <span class="text-base font-normal text-gray-400">so'm</span>`;
 
@@ -87,13 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     totalPriceEl.classList.remove('scale-105');
                 }, 200);
 
-                // Input va tugmani muzlatish
                 promoInput.disabled = true;
                 promoBtn.disabled = true;
                 promoBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
             } else {
-                // Noto'g'ri promokod kiritilganda xabar
                 promoBadgeContainer.innerHTML = `
           <div class="text-xs text-rose-500 font-medium flex items-center gap-1.5 animate-pulse py-1">
             <i class="fa-solid fa-circle-xmark"></i> Noto'g'ri promokod kiritildi!
@@ -121,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="text-xs text-gray-400">
             Xaridingiz uchun rahmat! Buyurtmangiz muvaffaqiyatli qabul qilindi.
           </p>
-          <button id="close-modal-btn" href="./profile.html" class="w-full bg-brand hover:bg-brand-hover text-white font-semibold text-xs py-3 rounded-xl transition">
+          <button id="close-modal-btn" class="w-full bg-brand hover:bg-brand-hover text-white font-semibold text-xs py-3 rounded-xl transition">
             <a href="./user.html" class="w-full h-full block">Tushunarli</a>
           </button>
         </div>
@@ -152,6 +171,12 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 payButton.disabled = false;
                 payButton.innerHTML = originalHTML;
+
+                // To'lov muvaffaqiyatli bo'lgach savat va checkout ma'lumotlarini tozalash
+                localStorage.removeItem('karvon_cart');
+                localStorage.removeItem('karvon_checkout_total');
+                localStorage.removeItem('karvon_checkout_count');
+
                 showSuccessModal();
             }, 2000);
         });

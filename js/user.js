@@ -26,7 +26,6 @@ window.closeRegisterModal = function () {
     if (registerModal) registerModal.classList.add("hidden");
 };
 
-// Form submit bo'lganda ma'lumotlarni saqlash
 window.handleRegisterSubmit = function (e) {
     e.preventDefault();
 
@@ -36,22 +35,16 @@ window.handleRegisterSubmit = function (e) {
     let avatar = document.getElementById("reg-avatar").value.trim();
 
     if (!avatar) {
-        avatar = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&q=80"; // Default rasm
+        avatar = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&q=80";
     }
 
-    const userData = {
-        firstName,
-        lastName,
-        address,
-        avatar
-    };
+    const userData = { firstName, lastName, address, avatar };
 
     localStorage.setItem("karvon_user", JSON.stringify(userData));
     closeRegisterModal();
     initUserProfile();
 };
 
-// Akkountdan chiqish
 window.logoutUser = function () {
     localStorage.removeItem("karvon_user");
     initUserProfile();
@@ -71,11 +64,9 @@ function initUserProfile() {
 
     const profileFullname = document.getElementById("profile-fullname");
     const profileAddress = document.getElementById("profile-address");
+    const profileCardAvatar = document.getElementById("profile-card-avatar");
 
     if (user) {
-        // ---- FOYDALANUVCHI TIZIMGA KIRGAN ----
-
-        // 1. Headerdagi ikonkani rasm va ismga almashtirish
         if (headerUserContainer) {
             headerUserContainer.innerHTML = `
                 <a href="user.html" class="flex items-center gap-2 hover:opacity-80 transition group">
@@ -85,23 +76,23 @@ function initUserProfile() {
             `;
         }
 
-        // 2. Sidebar va Asosiy profil ma'lumotlarini to'ldirish
         if (sidebarName) sidebarName.textContent = `${user.firstName} ${user.lastName}`;
         if (sidebarStatus) sidebarStatus.textContent = "Premium xaridor";
+
         if (profileFullname) profileFullname.textContent = `${user.firstName} ${user.lastName}`;
         if (profileAddress) profileAddress.textContent = user.address;
+        if (profileCardAvatar) profileCardAvatar.src = user.avatar;
 
-        // 3. Tarkibni ko'rsatish
-        if (unauthBanner) unauthBanner.classList.add("hidden");
+        if (unauthBanner) {
+            unauthBanner.classList.add("hidden");
+            unauthBanner.classList.remove("flex");
+        }
         if (authContentArea) authContentArea.classList.remove("hidden");
 
         renderUserCart();
         renderUserLikes();
 
     } else {
-        // ---- FOYDALANUVCHI RO'YXATDAN O'TMAGAN ----
-
-        // 1. Headerda Ro'yxatdan o'tish tugmasi
         if (headerUserContainer) {
             headerUserContainer.innerHTML = `
                 <button onclick="openRegisterModal()" class="bg-red-600 hover:bg-red-700 text-white font-semibold text-xs px-3 py-1.5 rounded-lg transition">
@@ -110,12 +101,13 @@ function initUserProfile() {
             `;
         }
 
-        // 2. Sidebar matnlari
         if (sidebarName) sidebarName.textContent = "Xush kelibsiz";
         if (sidebarStatus) sidebarStatus.textContent = "Mehmon";
 
-        // 3. Banner va ogohlantirishni ko'rsatish
-        if (unauthBanner) unauthBanner.classList.remove("hidden");
+        if (unauthBanner) {
+            unauthBanner.classList.remove("hidden");
+            unauthBanner.classList.add("flex");
+        }
         if (authContentArea) authContentArea.classList.add("hidden");
     }
 }
@@ -175,8 +167,14 @@ function renderUserCart() {
         return;
     }
 
+    const total = items.reduce((sum, product) => {
+        const numeric = parseInt(String(product.price).replace(/[^\d]/g, ""), 10) || 0;
+        return sum + numeric;
+    }, 0);
+
     container.innerHTML = `
         <h2 class="text-xl font-bold mb-4">Savatingizdagi buyurtmalar (${items.length})</h2>
+
         <div class="space-y-3">
             ${items.map(product => `
                 <div class="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-4 flex items-center justify-between gap-4">
@@ -194,8 +192,54 @@ function renderUserCart() {
                 </div>
             `).join("")}
         </div>
+
+        <!-- ================= XARID QILISH KARTASI ================= -->
+        <div class="relative mt-6 rounded-2xl overflow-hidden border border-red-900/40 bg-gradient-to-br from-zinc-900 via-zinc-900 to-red-950/30 p-6">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-red-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative flex flex-col sm:flex-row items-center justify-between gap-5">
+                <div class="flex items-center gap-4 w-full sm:w-auto">
+                    <div class="w-11 h-11 rounded-xl bg-red-600/15 border border-red-600/30 flex items-center justify-center text-red-500 text-lg shrink-0">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">Jami to'lov summasi</div>
+                        <div class="text-xl font-extrabold text-white mt-0.5">${total.toLocaleString("ru-RU")} so'm</div>
+                        <div class="text-[11px] text-zinc-500 mt-0.5">${items.length} ta mahsulot uchun</div>
+                    </div>
+                </div>
+
+                <a href="./pay.html" onclick="handleCheckout(event)"
+                    class="group w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold text-xs px-8 py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-red-600/25 hover:shadow-red-600/40 hover:-translate-y-0.5">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    Xarid qilish
+                    <i class="fa-solid fa-arrow-right text-[10px] transition-transform group-hover:translate-x-0.5"></i>
+                </a>
+            </div>
+        </div>
     `;
 }
+
+// Xarid qilish (pay.html'ga o'tishdan oldin summani saqlab qo'yish)
+window.handleCheckout = function (e) {
+    const items = getCartItems();
+    if (items.length === 0) {
+        if (e) e.preventDefault();
+        return;
+    }
+
+    const total = items.reduce((sum, product) => {
+        const numeric = parseInt(String(product.price).replace(/[^\d]/g, ""), 10) || 0;
+        return sum + numeric;
+    }, 0);
+
+    // pay.html o'qishi uchun to'lov ma'lumotlarini saqlab qo'yamiz
+    localStorage.setItem("karvon_checkout_total", String(total));
+    localStorage.setItem("karvon_checkout_count", String(items.length));
+
+    // Diqqat: savat shu yerda tozalanmaydi.
+    // Savat faqat pay.html'da to'lov MUVAFFAQIYATLI bo'lgandan keyin tozalanadi.
+};
 
 // ==========================================
 // 6. SAQLANGANLAR (LIKES)
@@ -242,12 +286,9 @@ window.removeUserLike = function (id) {
     renderUserLikes();
 };
 
-// Dastlabki yuklash
-document.addEventListener("DOMContentLoaded", () => {
-    initUserProfile();
-});
-
-// 1. EDIT MODALNI OCHISH VA YOPISH
+// ==========================================
+// 7. PROFILNI TAHRIRLASH
+// ==========================================
 window.openEditModal = function () {
     const user = getUserData();
     if (!user) return;
@@ -264,7 +305,6 @@ window.closeEditModal = function () {
     document.getElementById("edit-modal").classList.add("hidden");
 };
 
-// 2. TAHRIRLANGAN MA'LUMOTLARNI SAQLASH
 window.handleEditSubmit = function (e) {
     e.preventDefault();
 
@@ -281,136 +321,24 @@ window.handleEditSubmit = function (e) {
 
     localStorage.setItem("karvon_user", JSON.stringify(updatedUserData));
     closeEditModal();
-    initUserProfile(); // Ekrandagi ma'lumotlarni qayta render qilish
+    initUserProfile();
 };
 
-// 3. HISOBNI O'CHIRISH (DELETE ACCOUNT)
+// ==========================================
+// 8. HISOBNI O'CHIRISH
+// ==========================================
 window.deleteAccount = function () {
     const confirmDelete = confirm("Haqiqatdan ham hisobingizni o'chirmoqchimisiz? Barcha ma'lumotlaringiz o'chib ketadi.");
 
     if (confirmDelete) {
         localStorage.removeItem("karvon_user");
-        initUserProfile(); // Guest rejimiga o'tkazadi
+        initUserProfile();
     }
 };
 
-// 4. INIT USER PROFILE (RASM VA MA'LUMOTLARNI CHIQARISH QISMI YANGILANDI)
-function initUserProfile() {
-    const user = getUserData();
-    const headerUserContainer = document.getElementById("header-user-container");
-    const unauthBanner = document.getElementById("unauth-banner");
-    const authContentArea = document.getElementById("auth-content-area");
-
-    const sidebarName = document.getElementById("sidebar-user-name");
-    const sidebarStatus = document.getElementById("sidebar-user-status");
-
-    const profileFullname = document.getElementById("profile-fullname");
-    const profileAddress = document.getElementById("profile-address");
-    const profileCardAvatar = document.getElementById("profile-card-avatar");
-
-    if (user) {
-        // Header avatar & ism
-        if (headerUserContainer) {
-            headerUserContainer.innerHTML = `
-        <a href="user.html" class="flex items-center gap-2 hover:opacity-80 transition group">
-          <img src="${user.avatar}" alt="${user.firstName}" class="w-7 h-7 rounded-full object-cover border border-amber-500">
-          <span class="text-xs font-semibold text-zinc-200 group-hover:text-white hidden sm:inline">${user.firstName}</span>
-        </a>
-      `;
-        }
-
-        // Sidebar text
-        if (sidebarName) sidebarName.textContent = `${user.firstName} ${user.lastName}`;
-        if (sidebarStatus) sidebarStatus.textContent = "Premium xaridor";
-
-        // Profil kartasi ichidagi ma'lumotlar
-        if (profileFullname) profileFullname.textContent = `${user.firstName} ${user.lastName}`;
-        if (profileAddress) profileAddress.textContent = user.address;
-        if (profileCardAvatar) profileCardAvatar.src = user.avatar;
-
-        if (unauthBanner) unauthBanner.classList.add("hidden");
-        if (authContentArea) authContentArea.classList.remove("hidden");
-
-        renderUserCart();
-        renderUserLikes();
-
-    } else {
-        // Guest rejim
-        if (headerUserContainer) {
-            headerUserContainer.innerHTML = `
-        <button onclick="openRegisterModal()" class="bg-red-600 hover:bg-red-700 text-white font-semibold text-xs px-3 py-1.5 rounded-lg transition">
-          Kirish
-        </button>
-      `;
-        }
-
-        if (sidebarName) sidebarName.textContent = "Xush kelibsiz";
-        if (sidebarStatus) sidebarStatus.textContent = "Mehmon";
-
-        if (unauthBanner) unauthBanner.classList.remove("hidden");
-        if (authContentArea) authContentArea.classList.add("hidden");
-    }
-}
-
-function initUserProfile() {
-    const user = getUserData();
-    const headerUserContainer = document.getElementById("header-user-container");
-    const unauthBanner = document.getElementById("unauth-banner");
-    const authContentArea = document.getElementById("auth-content-area");
-
-    const sidebarName = document.getElementById("sidebar-user-name");
-    const sidebarStatus = document.getElementById("sidebar-user-status");
-
-    const profileFullname = document.getElementById("profile-fullname");
-    const profileAddress = document.getElementById("profile-address");
-    const profileCardAvatar = document.getElementById("profile-card-avatar");
-
-    if (user) {
-        // ---- RO'YXATDAN O'TGAN BO'LSA ----
-        if (headerUserContainer) {
-            headerUserContainer.innerHTML = `
-                <a href="user.html" class="flex items-center gap-2 hover:opacity-80 transition group">
-                    <img src="${user.avatar}" alt="${user.firstName}" class="w-7 h-7 rounded-full object-cover border border-amber-500">
-                    <span class="text-xs font-semibold text-zinc-200 group-hover:text-white hidden sm:inline">${user.firstName}</span>
-                </a>
-            `;
-        }
-
-        if (sidebarName) sidebarName.textContent = `${user.firstName} ${user.lastName}`;
-        if (sidebarStatus) sidebarStatus.textContent = "Premium xaridor";
-
-        if (profileFullname) profileFullname.textContent = `${user.firstName} ${user.lastName}`;
-        if (profileAddress) profileAddress.textContent = user.address;
-        if (profileCardAvatar) profileCardAvatar.src = user.avatar;
-
-        // Bannerni yashirish, kontentni ko'rsatish
-        if (unauthBanner) {
-            unauthBanner.classList.add("hidden");
-            unauthBanner.classList.remove("flex");
-        }
-        if (authContentArea) authContentArea.classList.remove("hidden");
-
-        renderUserCart();
-        renderUserLikes();
-
-    } else {
-        // ---- RO'YXATDAN O'TMAGAN BO'LSA ----
-        if (headerUserContainer) {
-            headerUserContainer.innerHTML = `
-                <button onclick="openRegisterModal()" class="bg-red-600 hover:bg-red-700 text-white font-semibold text-xs px-3 py-1.5 rounded-lg transition">
-                    Kirish
-                </button>
-            `;
-        }
-
-        if (sidebarName) sidebarName.textContent = "Xush kelibsiz";
-        if (sidebarStatus) sidebarStatus.textContent = "Mehmon";
-
-        // Bannerni o'rtaga flex qilib chiqarish, kontentni yashirish
-        if (unauthBanner) {
-            unauthBanner.classList.remove("hidden");
-            unauthBanner.classList.add("flex");
-        }
-        if (authContentArea) authContentArea.classList.add("hidden");
-    }
-}
+// ==========================================
+// 9. DASTLABKI YUKLASH
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    initUserProfile();
+});
