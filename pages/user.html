@@ -90,13 +90,11 @@
             </button>
         </aside>
 
-        <!-- CONTENT TARAFI -->
-        <main class="flex-1 p-6 lg:p-10 min-h-[550px] flex flex-col justify-center items-center">
+        <main class="flex-1 p-6 lg:p-10 min-h-[500px]">
 
-            <!-- RO'YXATDAN O'TMAGAN HODISA BANNERI (TO'LIQ O'RTAGA JOYLASHGAN) -->
             <div id="unauth-banner"
-                class="hidden w-full my-auto flex-col items-center justify-center text-center py-10">
-                <div class="max-w-md w-full mx-auto flex flex-col items-center justify-center space-y-6">
+                class="hidden min-h-[420px] w-full flex-col items-center justify-center text-center p-8">
+                <div class="max-w-md w-full flex flex-col items-center space-y-6">
 
                     <!-- Neon effektli Icon Box -->
                     <div class="relative flex items-center justify-center">
@@ -110,7 +108,7 @@
                     </div>
 
                     <!-- Matnlar -->
-                    <div class="space-y-2 text-center">
+                    <div class="space-y-2">
                         <h2 class="text-2xl font-extrabold text-white tracking-tight sm:text-3xl">
                             Siz ro'yxatdan o'tmagansiz
                         </h2>
@@ -130,7 +128,7 @@
 
                     <!-- Kafolat belgilari -->
                     <div
-                        class="flex items-center justify-center gap-6 pt-4 text-[11px] text-zinc-500 font-medium border-t border-zinc-900/80 w-full max-w-xs mx-auto">
+                        class="flex items-center justify-center gap-6 pt-4 text-[11px] text-zinc-500 font-medium border-t border-zinc-900/80 w-full">
                         <span class="flex items-center gap-1.5"><i class="fa-solid fa-lock text-red-500/80"></i> Xavfsiz
                             tizim</span>
                         <span class="flex items-center gap-1.5"><i class="fa-solid fa-bolt text-amber-500/80"></i>
@@ -140,9 +138,98 @@
                 </div>
             </div>
 
-            <!-- AUTH BO'LGAN FOYDALANUVCHILAR UCHUN KABINET (w-full qo'shildi) -->
-            <div id="auth-content-area" class="w-full space-y-6">
-                <!-- 1. ASOSIY TAB, 2. BUYURTMALAR... shu yerda qoladi -->
+            <!-- AUTH BO'LGAN FOYDALANUVCHILAR UCHUN KABINET -->
+            <div id="auth-content-area" class="space-y-6">
+
+                <!-- 1. ASOSIY TAB (Foydalanuvchi ma'lumotlari) -->
+                <section id="tab-asosiy" class="tab-content hidden space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-bold text-white">Foydalanuvchi ma'lumotlari</h2>
+                        <div class="flex items-center gap-3">
+                            <button onclick="openEditModal()"
+                                class="flex items-center gap-2 bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 text-amber-400 font-semibold text-xs px-4 py-2 rounded-xl transition">
+                                <i class="fa-solid fa-pen-to-square"></i> Tahrirlash
+                            </button>
+                            <button onclick="deleteAccount()"
+                                class="flex items-center gap-2 bg-red-950/30 border border-red-900/50 hover:bg-red-600 hover:text-white text-red-500 font-semibold text-xs px-4 py-2 rounded-xl transition">
+                                <i class="fa-solid fa-trash-can"></i> Hisobni o'chirish
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Profil Card -->
+                    <div
+                        class="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6">
+                        <div
+                            class="relative w-24 h-24 rounded-2xl overflow-hidden border-2 border-amber-500/50 bg-zinc-800 shrink-0">
+                            <img id="profile-card-avatar" src="" alt="User Avatar" class="w-full h-full object-cover">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                            <div class="bg-zinc-950/80 p-4 rounded-xl border border-zinc-800/80">
+                                <div class="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">Ism va
+                                    Familiya</div>
+                                <div id="profile-fullname" class="text-sm font-semibold text-white mt-1 capitalize">-
+                                </div>
+                            </div>
+
+                            <div class="bg-zinc-950/80 p-4 rounded-xl border border-zinc-800/80">
+                                <div class="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">Manzil</div>
+                                <div id="profile-address" class="text-sm font-semibold text-white mt-1 capitalize">-
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. BUYURTMALAR (SAVAT) TAB -->
+                <section id="tab-buyurtmalar" class="tab-content space-y-6">
+                    <div id="cart-container">
+                        <!-- JS dinamik yuklaydi -->
+                    </div>
+                </section>
+
+                <!-- 3. SAQLANGANLAR (LIKES) TAB -->
+                <section id="tab-saqlanganlar" class="tab-content hidden space-y-6">
+                    <h2 class="text-xl font-bold">Saqlangan mahsulotlar</h2>
+                    <div id="likes-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        <!-- JS dinamik yuklaydi -->
+                    </div>
+                </section>
+
+                <!-- 4. XABARLAR TAB -->
+                <section id="tab-xabarlar" class="tab-content hidden space-y-6">
+                    <h2 class="text-xl font-bold">Bildirishnomalar va Xabarlar</h2>
+                    <div
+                        class="bg-zinc-900/80 border border-green-500/30 rounded-2xl p-5 flex flex-col sm:flex-row items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-green-500/10 text-green-400 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-truck-ramp-box"></i>
+                        </div>
+                        <div class="flex-1 text-center sm:text-left">
+                            <div
+                                class="inline-block px-2 py-0.5 bg-green-500/20 text-green-400 text-[10px] font-bold rounded mb-1">
+                                Bitta mahsulotingiz yetib keldi!
+                            </div>
+                            <h4 class="text-sm font-semibold text-white">Premium Noise Cancelling Headphones - XM Series
+                            </h4>
+                            <p class="text-xs text-zinc-400 mt-0.5">Toshkent markaziy omborimizga muvaffaqiyatli yetib
+                                keldi va olib ketishingiz mumkin.</p>
+                        </div>
+                        <button
+                            class="bg-red-600 hover:bg-red-700 text-white text-xs font-semibold px-4 py-2 rounded-xl transition shrink-0">
+                            Olib ketish kodi
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 5. SOZLAMALAR TAB -->
+                <section id="tab-sozlamalar" class="tab-content hidden space-y-6">
+                    <h2 class="text-xl font-bold">Hisob sozlamalari</h2>
+                    <p class="text-xs text-zinc-400">Bu yerda manzillar va xavfsizlik sozlamalarini o'zgartirishingiz
+                        mumkin.</p>
+                </section>
+
             </div>
 
         </main>

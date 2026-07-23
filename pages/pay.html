@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karvon - To'lov</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#E03E2D',
+                        'brand-hover': '#c83424',
+                        dark: '#121111',
+                        'card-dark': '#1C1A1A',
+                        'card-border': '#2A2727',
+                        'card-selected': '#2D2222',
+                        'accent-pink': '#F48283'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121111;
+            color: #ECEAEA;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-dark text-gray-200 antialiased p-4 md:p-8">
+
+    <header class="max-w-6xl mx-auto flex justify-between items-center pb-8 border-b border-card-border mb-8">
+        <div class="text-2xl font-black tracking-wider text-brand">
+            KARVON
+        </div>
+
+        <div class="flex items-center space-x-6 text-sm">
+            <div class="flex items-center space-x-2">
+                <span
+                    class="w-6 h-6 rounded-full border border-gray-400 flex items-center justify-center text-xs text-gray-300">3</span>
+                <span class="font-medium text-white underline underline-offset-4 decoration-white">To'lov</span>
+            </div>
+            <div class="flex items-center space-x-2 text-gray-500">
+                <span
+                    class="w-6 h-6 rounded-full border border-gray-600 flex items-center justify-center text-xs">4</span>
+                <span>Tasdiqlash</span>
+            </div>
+        </div>
+
+        <button class="text-gray-400 hover:text-white transition">
+            <i class="fa-regular fa-circle-question text-lg"></i>
+        </button>
+    </header>
+
+    <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <section class="lg:col-span-7 space-y-6">
+            <h1 class="text-2xl md:text-3xl font-bold text-white mb-6">
+                To'lov usulini tanlang
+            </h1>
+
+            <div class="space-y-3">
+                <label
+                    class="flex items-center justify-between p-4 rounded-xl bg-card-dark border border-card-border hover:border-gray-600 cursor-pointer transition">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-white">Payme</div>
+                            <div class="text-xs text-gray-400">Sizning Payme akkauntingiz orqali</div>
+                        </div>
+                    </div>
+                    <input type="radio" name="payment" class="w-5 h-5 accent-brand bg-transparent border-gray-600">
+                </label>
+
+                <label
+                    class="flex items-center justify-between p-4 rounded-xl bg-card-dark border border-card-border hover:border-gray-600 cursor-pointer transition">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400">
+                            <i class="fa-solid fa-[#00AEEF] fa-mobile-screen"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-white">Click</div>
+                            <div class="text-xs text-gray-400">Click Up ilovasi orqali tezkor to'lov</div>
+                        </div>
+                    </div>
+                    <input type="radio" name="payment" class="w-5 h-5 accent-brand bg-transparent border-gray-600">
+                </label>
+
+                <label
+                    class="flex items-center justify-between p-4 rounded-xl bg-card-selected border border-brand/40 cursor-pointer transition relative">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-300">
+                            <i class="fa-regular fa-credit-card"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="font-semibold text-white">Karta orqali</span>
+                                <span
+                                    class="bg-amber-600/30 text-amber-500 text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wide">ASOSIY</span>
+                            </div>
+                            <div class="text-xs text-gray-400 mt-0.5">Uzcard **** 4242</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-xs text-gray-400 underline hover:text-white transition">O'zgartirish</span>
+                        <div class="w-5 h-5 rounded-full bg-accent-pink flex items-center justify-center">
+                            <div class="w-2 h-2 rounded-full bg-white"></div>
+                        </div>
+                    </div>
+                </label>
+
+                <label
+                    class="flex items-center justify-between p-4 rounded-xl bg-card-dark border border-card-border hover:border-gray-600 cursor-pointer transition">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-white">Hamyon</div>
+                            <div class="text-xs text-gray-400">Balans: 850 000 so'm</div>
+                        </div>
+                    </div>
+                    <input type="radio" name="payment" class="w-5 h-5 accent-brand bg-transparent border-gray-600">
+                </label>
+
+                <label
+                    class="flex items-center justify-between p-4 rounded-xl bg-card-dark border border-card-border hover:border-gray-600 cursor-pointer transition">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400">
+                            <i class="fa-regular fa-calendar-check"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-white">Muddatli to'lov (Bo'lib to'lash)</div>
+                            <div class="text-xs text-gray-400">Foizsiz 12 oygacha bo'lgan rejalar</div>
+                        </div>
+                    </div>
+                    <input type="radio" name="payment" class="w-5 h-5 accent-brand bg-transparent border-gray-600">
+                </label>
+            </div>
+        </section>
+
+        <section class="lg:col-span-5">
+            <div class="bg-card-dark border border-card-border rounded-2xl p-6 space-y-6">
+
+                <h2 class="text-xs font-bold tracking-wider text-gray-300 uppercase flex items-center space-x-2">
+                    <span class="w-2 h-2 bg-brand inline-block"></span>
+                    <span>BUYURTMA XULOSASI</span>
+                </h2>
+
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-400">Mahsulotlar (3 ta)</span>
+                        <span class="font-medium text-white">4 150 000 so'm</span>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-400">Yetkazib berish (Guanchjou - Toshkent)</span>
+                        <span class="font-medium text-emerald-500">Bepul</span>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-400">Xizmat haqi (5%)</span>
+                        <span class="font-medium text-white">112 000 so'm</span>
+                    </div>
+                </div>
+
+                <!-- Promokod kiritish formasi -->
+                <div class="flex gap-2 pt-2">
+                    <input type="text" id="promo-code-input" placeholder="Promo Kod Kiriting"
+                        class="w-full bg-black/40 border border-card-border rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-brand transition">
+                    <button id="apply-promo-btn"
+                        class="bg-card-border hover:bg-gray-700 text-white font-semibold text-xs px-4 rounded-xl transition whitespace-nowrap">
+                        Qo'llash
+                    </button>
+                </div>
+
+                <hr class="border-card-border">
+
+                <div class="bg-black/30 border border-card-border rounded-xl p-4">
+                    <div class="text-xs text-gray-400 uppercase font-semibold">
+                        YAKUNIY NARX (Barchasi kiritilgan)
+                    </div>
+                    <div id="total-price" data-original-price="4262000"
+                        class="text-2xl md:text-3xl font-extrabold text-white mt-2 transition-all duration-300">
+                        4 262 000 <span class="text-base font-normal text-gray-400">so'm</span>
+                    </div>
+                    <div class="flex justify-end items-center space-x-1 text-[10px] text-gray-500 mt-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand inline-block"></span>
+                        <span>UZ -> TAS</span>
+                    </div>
+                </div>
+
+                <!-- Promokod qo'llanilganda rasmdagidek chiqadigan dinamik badge konteyneri -->
+                <div id="promo-badge-container"></div>
+
+                <button id="pay-btn"
+                    class="w-full bg-brand hover:bg-brand-hover text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center space-x-2 group">
+                    <span id="pay-btn-text">4 262 000 so'm to'lash</span>
+                    <i id="pay-btn-icon"
+                        class="fa-solid fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+                </button>
+
+                <p class="text-[11px] text-gray-500 text-center leading-relaxed">
+                    "To'lash" tugmasini bosish orqali siz
+                    <a href="#" class="underline hover:text-gray-300">Xizmat ko'rsatish shartlari</a> va
+                    <a href="#" class="underline hover:text-gray-300">Maxfiylik siyosatiga</a> rozilik bildirasiz.
+                </p>
+
+                <div
+                    class="flex items-center justify-center space-x-2 pt-2 border-t border-card-border/50 text-[10px] text-gray-400 uppercase tracking-widest font-semibold">
+                    <div class="border border-gray-600 px-1.5 py-0.5 rounded text-brand font-bold text-[9px]">SAFE</div>
+                    <span>XAVFSIZ TRANZAKSIYA</span>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../js/pay.js"></script>
+
+</body>
+
+</html>

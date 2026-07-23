@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahsulot - Karvon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-[#0e0c0d] text-white font-sans antialiased min-h-screen">
+    <header class="border-b border-zinc-800 bg-[#0e0c0d]/90 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+
+            <!-- Logo -->
+            <div class="flex items-center gap-6">
+                <a href="/" class="text-xl font-extrabold tracking-wider text-white">KARVON</a>
+                <button
+                    class="hidden md:flex items-center gap-2 bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-lg text-sm text-zinc-300 hover:text-white">
+                    <i class="fa-solid fa-bars"></i> Kategoriyalar
+                </button>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="flex-1 max-w-2xl flex items-center gap-2">
+                <div class="relative flex-1">
+                    <input type="text" placeholder="Mahsulot yoki do'kon qidirish..."
+                        class="w-full bg-zinc-900 border border-zinc-800 rounded-xl py-2 pl-9 pr-4 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition">
+                    <i
+                        class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-xs"></i>
+                </div>
+            </div>
+
+            <!-- Action Icons -->
+            <div class="flex items-center gap-4">
+                <div class="relative cursor-pointer hover:text-red-500 transition">
+                    <i class="fa-regular fa-heart text-xl"></i>
+                    <span id="like-count"
+                        class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                        0
+                    </span>
+                </div>
+
+                <div class="relative cursor-pointer hover:text-red-500 transition">
+                    <i class="fa-solid fa-bag-shopping text-xl"></i>
+                    <span
+                        class="absolute -top-2 -right-2 bg-yellow-500 text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                        0
+                    </span>
+                </div>
+
+                <div id="header-user-container"></div>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+
+        <!-- Breadcrumb -->
+        <div id="breadcrumb" class="text-[11px] uppercase tracking-wider text-zinc-500 space-x-1 mb-6">
+            <span>Bosh sahifa</span> <span>•</span> <span>Elektronika</span> <span>•</span>
+            <span>Quloqchinlar</span> <span>•</span> <span id="crumb-title" class="text-zinc-300">...</span>
+        </div>
+
+        <div id="not-found" class="hidden text-center py-24">
+            <p class="text-zinc-400 text-sm">Mahsulot topilmadi.</p>
+            <a href="./index.html" class="text-amber-500 text-xs underline mt-2 inline-block">Katalogga qaytish</a>
+        </div>
+
+        <div id="product-detail" class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+            <!-- ================= GALEREYA ================= -->
+            <div class="flex gap-4">
+                <div id="thumb-list" class="flex flex-col gap-3 w-16 shrink-0">
+                    <!-- JS render qiladi -->
+                </div>
+
+                <div class="relative flex-1 rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 h-[420px]">
+                    <img id="main-image" src="" alt="" class="w-full h-full object-cover">
+                    <button id="buyer-photos-pill"
+                        class="absolute bottom-3 left-3 flex items-center gap-2 bg-black/60 backdrop-blur px-3 py-1.5 rounded-full text-[11px] text-zinc-200 border border-zinc-700">
+                        <i class="fa-regular fa-images text-amber-400"></i>
+                        <span id="buyer-photos-text">Xaridor rasmlari</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= MALUMOTLAR ================= -->
+            <div class="space-y-5">
+
+                <!-- Badge qatori -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <span id="badge-source"
+                        class="bg-zinc-900 border border-zinc-800 text-zinc-300 text-[10px] font-bold px-2.5 py-1 rounded-lg flex items-center gap-1.5">
+                        <i class="fa-solid fa-star text-amber-400"></i> <span id="badge-source-text">1688 SOURCE</span>
+                    </span>
+                    <span
+                        class="bg-zinc-900 border border-zinc-800 text-zinc-300 text-[10px] font-bold px-2.5 py-1 rounded-lg">
+                        CHAKANA
+                    </span>
+                    <span
+                        class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-lg flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check"></i> TASDIQLANGAN SOTUVCHI
+                    </span>
+                </div>
+
+                <!-- Title -->
+                <h1 id="product-title" class="text-3xl font-extrabold tracking-tight leading-tight">...</h1>
+
+                <!-- Rating -->
+                <div class="flex items-center gap-3 text-xs text-zinc-400">
+                    <span class="flex items-center gap-1 text-amber-500 font-bold">
+                        <i class="fa-solid fa-star"></i> <span id="product-rating">0.0</span>
+                    </span>
+                    <span id="product-reviews">(0 sharh)</span>
+                    <span class="text-zinc-700">|</span>
+                    <span id="product-sold">0 sotilgan</span>
+                </div>
+
+                <!-- Narx bloki -->
+                <div class="bg-zinc-950/60 border border-zinc-800 rounded-2xl p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[11px] text-zinc-500 uppercase font-bold tracking-wider">Yakuniy narx</span>
+                        <span id="discount-badge"
+                            class="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">-0%</span>
+                    </div>
+
+                    <div class="flex items-baseline gap-3">
+                        <span id="final-price" class="text-3xl font-black text-white">0 so'm</span>
+                        <span id="old-price" class="text-sm text-zinc-600 line-through">0 so'm</span>
+                    </div>
+
+                    <div class="space-y-1.5 text-xs pt-2 border-t border-zinc-900">
+                        <div class="flex justify-between text-zinc-400">
+                            <span>Mahsulot narxi</span>
+                            <span id="price-base">0 so'm</span>
+                        </div>
+                        <div class="flex justify-between text-zinc-400">
+                            <span id="price-shipping-label">Xalqaro yetkazib berish</span>
+                            <span id="price-shipping">0 so'm</span>
+                        </div>
+                        <div class="flex justify-between text-zinc-400">
+                            <span id="price-fee-label">Karvon xizmat haqi</span>
+                            <span id="price-fee">0 so'm</span>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex items-center justify-between pt-3 border-t border-zinc-900 text-[11px] text-zinc-500">
+                        <span><i class="fa-solid fa-box mr-1"></i> Minimal buyurtma: <span id="moq"
+                                class="text-zinc-300 font-semibold">1 dona</span></span>
+                        <a href="#platform-table" class="text-amber-500 hover:underline">Narxlarni solishtirish <i
+                                class="fa-solid fa-arrow-down text-[9px]"></i></a>
+                    </div>
+                </div>
+
+                <!-- Yetkazib berish tanlash -->
+                <div class="grid grid-cols-2 gap-2">
+                    <button id="btn-avia-single" onclick="setShippingSingle('AVIA')"
+                        class="py-2.5 rounded-xl text-xs font-bold border border-amber-500 bg-amber-500/10 text-amber-400 flex items-center justify-center gap-1.5 transition">
+                        <i class="fa-solid fa-plane"></i> AVIA (+7%)
+                    </button>
+                    <button id="btn-ground-single" onclick="setShippingSingle('GROUND')"
+                        class="py-2.5 rounded-xl text-xs font-bold border border-zinc-800 bg-zinc-900 text-zinc-400 hover:text-white flex items-center justify-center gap-1.5 transition">
+                        <i class="fa-solid fa-truck"></i> GROUND (+4%)
+                    </button>
+                </div>
+
+                <!-- Amallar -->
+                <div class="flex items-center gap-3">
+                    <button id="add-to-cart-btn"
+                        class="flex-1 bg-zinc-800 hover:bg-red-600 hover:text-white text-zinc-200 font-semibold text-sm py-3 rounded-xl transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-shopping"></i> Savatga qo'shish
+                    </button>
+                    <button id="like-btn"
+                        class="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:border-red-500 transition">
+                        <i class="fa-regular fa-heart text-zinc-300"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PLATFORMALAR SOLISHTIRUVI ================= -->
+        <div id="platform-table" class="mt-14 max-w-4xl mx-auto scroll-mt-24">
+            <h2 class="text-xl font-extrabold text-center">Platformalar bo'ylab narxlar solishtiruvi</h2>
+            <p class="text-center text-[11px] text-zinc-500 uppercase tracking-wider mt-1">Yetkazib berish usuli</p>
+
+            <div class="mt-6 bg-zinc-950/60 border border-zinc-900 rounded-2xl overflow-hidden">
+                <div
+                    class="grid grid-cols-4 px-6 py-3 text-[11px] font-bold text-amber-500 uppercase tracking-wider border-b border-zinc-900">
+                    <span>Platforma</span>
+                    <span>Narx</span>
+                    <span>Yetkazish</span>
+                    <span>Tavsiya</span>
+                </div>
+                <div id="platform-rows"><!-- JS render qiladi --></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/market.js"></script>
+    <script src="../js/single.js"></script>
+</body>
+
+</html>

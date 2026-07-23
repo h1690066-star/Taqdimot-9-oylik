@@ -13,13 +13,12 @@
 
 <body class="bg-[#0e0c0d] text-white font-sans antialiased min-h-screen">
 
-    <!-- HEADER QISMI -->
     <header class="border-b border-zinc-800 bg-[#0e0c0d]/90 backdrop-blur sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
 
             <!-- Logo -->
             <div class="flex items-center gap-6">
-                <a href="#" class="text-xl font-extrabold tracking-wider text-white">KARVON</a>
+                <a href="/" class="text-xl font-extrabold tracking-wider text-white">KARVON</a>
                 <button
                     class="hidden md:flex items-center gap-2 bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-lg text-sm text-zinc-300 hover:text-white">
                     <i class="fa-solid fa-bars"></i> Kategoriyalar
@@ -66,28 +65,29 @@
             </div>
 
             <!-- Action Icons (Likes, Cart, Login) -->
+            <!-- Action Icons (Likes, Cart, User Profile / Login) -->
             <div class="flex items-center gap-4">
                 <!-- Like Badge Icon -->
-                <a href="./pages/user.html" class="relative cursor-pointer hover:text-red-500 transition">
+                <div class="relative cursor-pointer hover:text-red-500 transition">
                     <i class="fa-regular fa-heart text-xl"></i>
                     <span id="like-count"
                         class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                         0
                     </span>
-                </a>
+                </div>
 
                 <!-- Cart Icon -->
-                <a href="./pages/user.html" class="relative cursor-pointer hover:text-red-500 transition">
+                <div class="relative cursor-pointer hover:text-red-500 transition">
                     <i class="fa-solid fa-bag-shopping text-xl"></i>
-                    <span id="cart-count"
+                    <span
                         class="absolute -top-2 -right-2 bg-yellow-500 text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                         0
                     </span>
-                </a>
+                </div>
 
                 <!-- DYNAMIC USER PROFILE / LOGIN CONTAINER -->
                 <div id="header-user-container">
-                    <!-- JS ushbu joyga rasm va ismni yoki Kirish tugmasini qo'yadi -->
+                    <!-- JS avtorizatsiyaga qarab ushbu joyga rasm va ismni yoki Kirish tugmasini qo'yadi -->
                 </div>
             </div>
 
