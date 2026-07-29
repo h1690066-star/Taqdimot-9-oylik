@@ -1,5 +1,5 @@
 // ==========================================
-// 1. LOCALSTORAGE MANTIG'I (USER, CART, LIKES)
+// 1. LOCALSTORAGE MANTIG'I (USER, CART, LIKES, ORDERS)
 // ==========================================
 function getUserData() {
     return JSON.parse(localStorage.getItem("karvon_user")) || null;
@@ -11,6 +11,10 @@ function getCartItems() {
 
 function getLikedItems() {
     return JSON.parse(localStorage.getItem("karvon_likes")) || [];
+}
+
+function getOrders() {
+    return JSON.parse(localStorage.getItem("karvon_orders")) || [];
 }
 
 // ==========================================
@@ -45,8 +49,22 @@ window.handleRegisterSubmit = function (e) {
     initUserProfile();
 };
 
-window.logoutUser = function () {
+// ==========================================
+// 2.1 CHIQISH TASDIQLASH MODALI
+// ==========================================
+window.openLogoutModal = function () {
+    const modal = document.getElementById("logout-modal");
+    if (modal) modal.classList.remove("hidden");
+};
+
+window.closeLogoutModal = function () {
+    const modal = document.getElementById("logout-modal");
+    if (modal) modal.classList.add("hidden");
+};
+
+window.confirmLogout = function () {
     localStorage.removeItem("karvon_user");
+    closeLogoutModal();
     initUserProfile();
 };
 
@@ -91,6 +109,7 @@ function initUserProfile() {
 
         renderUserCart();
         renderUserLikes();
+        renderUserNotifications();
 
     } else {
         if (headerUserContainer) {
@@ -132,6 +151,7 @@ window.switchTab = function (tabName) {
 
     if (tabName === "buyurtmalar") renderUserCart();
     if (tabName === "saqlanganlar") renderUserLikes();
+    if (tabName === "xabarlar") renderUserNotifications();
 };
 
 // ==========================================
@@ -285,6 +305,78 @@ window.removeUserLike = function (id) {
     localStorage.setItem("karvon_likes", JSON.stringify(items));
     renderUserLikes();
 };
+
+// ==========================================
+// 6.1 XABARLAR (SOTIB OLINGAN BUYURTMALAR HOLATI)
+// ==========================================
+function renderUserNotifications() {
+    const container = document.getElementById("notifications-container");
+    if (!container) return;
+
+    const orders = getOrders();
+
+    if (orders.length === 0) {
+        container.innerHTML = `
+            <div class="flex flex-col items-center justify-center py-16 text-center space-y-4">
+                <div class="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-600 text-2xl">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-sm font-semibold text-white">Hali xabarlar yo'q</h3>
+                    <p class="text-xs text-zinc-500 max-w-xs">Xarid qilgan mahsulotlaringiz holati shu yerda ko'rinadi.</p>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    // Eng yangi buyurtma birinchi bo'lib chiqadi
+    const sortedOrders = [...orders].sort((a, b) => b.id - a.id);
+
+    container.innerHTML = sortedOrders.map(order => {
+        const orderDate = new Date(order.date);
+        const formattedDate = orderDate.toLocaleDateString("uz-UZ", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric"
+        });
+
+        const productsHTML = order.items.map(product => `
+            <div class="flex items-center gap-4 py-3 ${order.items.length > 1 ? 'border-b border-zinc-800/80 last:border-b-0' : ''}">
+                <img src="${product.image}" class="w-14 h-14 rounded-xl object-cover bg-zinc-800 shrink-0">
+                <div class="flex-1 min-w-0">
+                    <span class="text-[10px] text-amber-500 font-semibold uppercase">${product.platform || 'Taobao'}</span>
+                    <h4 class="text-xs font-semibold text-white line-clamp-1">${product.title}</h4>
+                    <div class="text-xs font-bold text-white mt-1">${product.price}</div>
+                </div>
+            </div>
+        `).join("");
+
+        return `
+            <div class="bg-zinc-900/80 border border-amber-500/20 rounded-2xl p-5 space-y-4">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-full bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="inline-block px-2 py-0.5 bg-amber-500/15 text-amber-400 text-[10px] font-bold rounded mb-1">
+                            Buyurtmangiz tayyorlanmoqda
+                        </div>
+                        <p class="text-xs text-zinc-400">
+                            ${order.items.length} ta mahsulot uchun buyurtmangiz qabul qilindi va hozirda tayyorlanmoqda.
+                            Jami: <span class="text-white font-semibold">${Number(order.total).toLocaleString("ru-RU")} so'm</span>
+                        </p>
+                        <p class="text-[10px] text-zinc-600 mt-1">${formattedDate}</p>
+                    </div>
+                </div>
+
+                <div class="bg-zinc-950/60 border border-zinc-800/80 rounded-xl px-4 divide-y divide-zinc-800/80">
+                    ${productsHTML}
+                </div>
+            </div>
+        `;
+    }).join("");
+}
 
 // ==========================================
 // 7. PROFILNI TAHRIRLASH

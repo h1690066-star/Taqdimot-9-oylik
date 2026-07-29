@@ -172,6 +172,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 payButton.disabled = false;
                 payButton.innerHTML = originalHTML;
 
+                // ================= BUYURTMANI "XABARLAR" UCHUN SAQLASH =================
+                // Savat tozalanishidan OLDIN, hozirgi savatdagi mahsulotlarni
+                // "karvon_orders" ro'yxatiga qo'shib qo'yamiz. Shu ro'yxat asosida
+                // user.html sahifasidagi "Xabarlar" bo'limi mahsulotlarni chiqaradi.
+                const cartItemsForOrder = JSON.parse(localStorage.getItem('karvon_cart')) || [];
+
+                if (cartItemsForOrder.length > 0) {
+                    const orders = JSON.parse(localStorage.getItem('karvon_orders')) || [];
+
+                    orders.push({
+                        id: Date.now(),
+                        items: cartItemsForOrder,
+                        total: checkoutTotal,
+                        date: new Date().toISOString(),
+                        status: 'tayyorlanmoqda'
+                    });
+
+                    localStorage.setItem('karvon_orders', JSON.stringify(orders));
+                }
+                // ==========================================================================
+
                 // To'lov muvaffaqiyatli bo'lgach savat va checkout ma'lumotlarini tozalash
                 localStorage.removeItem('karvon_cart');
                 localStorage.removeItem('karvon_checkout_total');

@@ -1,11 +1,6 @@
-// ==========================================
-// SINGLE PRODUCT PAGE LOGIC
-// ==========================================
-
 let singleShipping = "AVIA";
 let currentProduct = null;
 
-// Platformalar bo'yicha narx multiplikatorlari va yetkazish ma'lumotlari
 const PLATFORM_INFO = [
     { key: "1688", label: "1688", icon: "1688", color: "bg-amber-600", priceMult: 1.0, ship: "Kargo (15-20 kun)", moq: true },
     { key: "Pinduoduo", label: "Pinduoduo", icon: "拼", color: "bg-red-600", priceMult: 1.067, ship: "Standart (12 kun)", moq: false },
@@ -17,8 +12,7 @@ function fmt(n) {
     return Math.round(n).toLocaleString("uz-UZ") + " so'm";
 }
 
-// Mahsulotga xos, lekin barqaror (deterministik) "tasodifiy" son olish uchun
-function seedFrom(id, salt) {
+function seedFrom(id, salt) {   
     const x = Math.sin(id * 999 + salt) * 10000;
     return x - Math.floor(x);
 }
@@ -49,7 +43,6 @@ function renderThumbnails(product) {
         thumbList.appendChild(thumb);
     }
 
-    // "+12 ko'proq" overlay so'nggi thumbnaildan keyin
     const more = document.createElement("button");
     more.className =
         "w-16 h-16 rounded-xl overflow-hidden border border-zinc-800 relative flex items-center justify-center bg-zinc-900 text-xs font-bold text-zinc-400 hover:text-white";
