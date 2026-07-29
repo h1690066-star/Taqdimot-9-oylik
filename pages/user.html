@@ -15,9 +15,11 @@
 
     <!-- HEADER -->
     <header class="border-b border-zinc-800 bg-[#0e0c0d]/90 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2 md:gap-4">
+
+            <!-- LOGO + DESKTOP NAV -->
             <div class="flex items-center gap-8">
-                <a href="/" class="text-xl font-extrabold tracking-wider text-white">KARVON</a>
+                <a href="/" class="text-lg md:text-xl font-extrabold tracking-wider text-white">KARVON</a>
                 <nav class="hidden md:flex items-center gap-6 text-xs text-zinc-400 font-medium">
                     <a href="#" class="hover:text-white transition">Katalog</a>
                     <a href="#" class="hover:text-white transition">Aksiyalar</a>
@@ -25,13 +27,22 @@
                 </nav>
             </div>
 
-            <div class="flex items-center gap-4">
-                <div class="relative">
-                    <input type="text" placeholder="Mahsulotlarni qidirish..."
-                        class="bg-zinc-900 border border-zinc-800 rounded-xl py-1.5 pl-8 pr-4 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition w-48 md:w-64">
-                    <i
-                        class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-500 text-[10px]"></i>
-                </div>
+            <!-- DESKTOP SEARCH -->
+            <div class="relative hidden sm:block flex-1 max-w-xs md:max-w-sm">
+                <input type="text" placeholder="Mahsulotlarni qidirish..."
+                    class="w-full bg-zinc-900 border border-zinc-800 rounded-xl py-1.5 pl-8 pr-4 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition">
+                <i
+                    class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-500 text-[10px]"></i>
+            </div>
+
+            <!-- RIGHT SIDE ICONS -->
+            <div class="flex items-center gap-3 md:gap-4">
+
+                <!-- Mobile search toggle (only < sm) -->
+                <button id="mobile-search-btn" class="sm:hidden text-zinc-300 hover:text-white transition text-sm">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+
                 <a href="user.html" class="hover:text-amber-500 transition text-sm">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </a>
@@ -40,9 +51,47 @@
                 <div id="header-user-container" class="flex items-center gap-2">
                     <!-- JS ushbu joyga rasm + ismni yoki Kirish tugmasini chiqaradi -->
                 </div>
+
+                <!-- Hamburger (mobile only) -->
+                <button id="mobile-menu-btn" class="md:hidden text-zinc-300 hover:text-white transition text-lg ml-1">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
         </div>
+
+        <!-- MOBILE SEARCH ROW (toggled) -->
+        <div id="mobile-search-row" class="hidden sm:hidden px-4 pb-3">
+            <div class="relative">
+                <input type="text" placeholder="Mahsulotlarni qidirish..."
+                    class="w-full bg-zinc-900 border border-zinc-800 rounded-xl py-1.5 pl-8 pr-4 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition">
+                <i
+                    class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-500 text-[10px]"></i>
+            </div>
+        </div>
+
+        <!-- MOBILE NAV MENU (toggled) -->
+        <nav id="mobile-nav-menu"
+            class="hidden md:hidden flex-col gap-1 px-4 pb-3 text-sm text-zinc-300 font-medium border-t border-zinc-800 pt-3">
+            <a href="./market.html" class="py-2 hover:text-white transition">Katalog</a>
+            <a href="./market.html" class="py-2 hover:text-white transition">Aksiyalar</a>
+            <a href="#" class="py-2 hover:text-white transition">Yordam</a>
+        </nav>
     </header>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileNav = document.getElementById('mobile-nav-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('hidden');
+            mobileNav.classList.toggle('flex');
+        });
+
+        const searchBtn = document.getElementById('mobile-search-btn');
+        const searchRow = document.getElementById('mobile-search-row');
+        searchBtn.addEventListener('click', () => {
+            searchRow.classList.toggle('hidden');
+        });
+    </script>
 
     <!-- MAIN KABINET SECTION -->
     <div class="flex-1 max-w-7xl w-full mx-auto flex flex-col lg:flex-row border-b border-zinc-900">
@@ -319,13 +368,14 @@
     <!-- ================= CHIQISH TASDIQLASH MODALI ================= -->
     <div id="logout-modal"
         class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-        <div class="bg-zinc-950 border border-zinc-800 rounded-2xl w-full max-w-sm p-6 space-y-5 relative shadow-2xl text-center">
-            <button onclick="closeLogoutModal()"
-                class="absolute top-4 right-4 text-zinc-500 hover:text-white text-sm">
+        <div
+            class="bg-zinc-950 border border-zinc-800 rounded-2xl w-full max-w-sm p-6 space-y-5 relative shadow-2xl text-center">
+            <button onclick="closeLogoutModal()" class="absolute top-4 right-4 text-zinc-500 hover:text-white text-sm">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <div class="w-14 h-14 mx-auto rounded-full bg-red-600/15 border border-red-600/30 flex items-center justify-center text-red-500 text-xl">
+            <div
+                class="w-14 h-14 mx-auto rounded-full bg-red-600/15 border border-red-600/30 flex items-center justify-center text-red-500 text-xl">
                 <i class="fa-solid fa-right-from-bracket"></i>
             </div>
 
