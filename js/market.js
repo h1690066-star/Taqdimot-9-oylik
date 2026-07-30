@@ -1438,10 +1438,9 @@ let currentShipping = "AVIA";
 let cartList = JSON.parse(localStorage.getItem("karvon_cart")) || [];
 let likedList = JSON.parse(localStorage.getItem("karvon_likes")) || [];
 
-// DOM ELEMENTLARI
 const catalogGrid = document.getElementById("catalog-grid");
 const minPriceInput = document.getElementById("min-price");
-const maxPriceInput = document.getElementById("max-price");      
+const maxPriceInput = document.getElementById("max-price");
 const ratingCheckbox = document.getElementById("rating-4plus");
 const btnAvia = document.getElementById("btn-avia");
 const btnGround = document.getElementById("btn-ground");
