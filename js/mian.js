@@ -1,5 +1,5 @@
 let products = [
-    // ================= TAOBAO (10 TA) =================
+    // ================= TAOBAO (15 TA) =================
     {
         id: 1,
         title: "Premium Mexanik Klaviatura K3 RGB",
@@ -90,10 +90,55 @@ let products = [
         image: "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=500&q=80",
         isLiked: false
     },
-
-    // ================= 1688 (10 TA) =================
     {
         id: 11,
+        title: "Ultra Slim Power Bank 20000mAh Fast Charge",
+        price: "290 000 so'm",
+        platform: "Taobao",
+        category: "Gadjetlar",
+        image: "https://images.unsplash.com/photo-1609592424109-dd9892f1b177?w=500&q=80",
+        isLiked: false
+    },
+    {
+        id: 12,
+        title: "Smart Robot Vacuum Cleaner Wet & Dry",
+        price: "2 100 000 so'm",
+        platform: "Taobao",
+        category: "Maishiy texnika",
+        image: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=500&q=80",
+        isLiked: false
+    },
+    {
+        id: 13,
+        title: "Foldable Laptop Stand Aluminum Alloy",
+        price: "160 000 so'm",
+        platform: "Taobao",
+        category: "Aksessuarlar",
+        image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500&q=80",
+        isLiked: false
+    },
+    {
+        id: 14,
+        title: "Aroma Diffuser Essential Oil Humidifier",
+        price: "190 000 so'm",
+        platform: "Taobao",
+        category: "Maishiy texnika",
+        image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=500&q=80",
+        isLiked: false
+    },
+    {
+        id: 15,
+        title: "Wireless Earbuds TWS Bluetooth 5.3",
+        price: "220 000 so'm",
+        platform: "Taobao",
+        category: "Gadjetlar",
+        image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&q=80",
+        isLiked: false
+    },
+
+    // ================= 1688 (15 TA) =================
+    {
+        id: 16,
         title: "Luxe Edition Urban Sneakers",
         price: "680 000 so'm",
         platform: "1688",
@@ -102,7 +147,7 @@ let products = [
         isLiked: false
     },
     {
-        id: 12,
+        id: 17,
         title: "Professional 4K Mirrorless Camera Kit",
         price: "12 400 000 so'm",
         platform: "1688",
@@ -111,7 +156,7 @@ let products = [
         isLiked: false
     },
     {
-        id: 13,
+        id: 18,
         title: "Waterproof Travel Backpack with USB Port",
         price: "240 000 so'm",
         platform: "1688",
@@ -120,7 +165,7 @@ let products = [
         isLiked: false
     },
     {
-        id: 14,
+        id: 19,
         title: "Classic Leather Men's Jacket Vintage Style",
         price: "950 000 so'm",
         platform: "1688",
@@ -129,7 +174,7 @@ let products = [
         isLiked: false
     },
     {
-        id: 15,
+        id: 20,
         title: "Polarized Sunglasses UV400 Protection",
         price: "150 000 so'm",
         platform: "1688",
@@ -138,7 +183,7 @@ let products = [
         isLiked: false
     },
     {
-        id: 16,
+        id: 21,
         title: "Stainless Steel Smart Thermos Bottle 500ml",
         price: "110 000 so'm",
         platform: "1688",
@@ -147,7 +192,7 @@ let products = [
         isLiked: false
     },
     {
-        id: 17,
+        id: 22,
         title: "Sport Fitness Smart Band Heart Rate Tracker",
         price: "180 000 so'm",
         platform: "1688",
@@ -156,7 +201,7 @@ let products = [
         isLiked: false
     },
     {
-        id: 18,
+        id: 23,
         title: "Professional Drone 4K Camera GPS Quadcopter",
         price: "3 450 000 so'm",
         platform: "1688",
@@ -165,7 +210,7 @@ let products = [
         isLiked: false
     },
     {
-        id: 19,
+        id: 24,
         title: "Modern Mechanical Wrist Watch Automatic",
         price: "1 150 000 so'm",
         platform: "1688",
@@ -174,12 +219,57 @@ let products = [
         isLiked: false
     },
     {
-        id: 20,
+        id: 25,
         title: "Ergonomic Gaming Chair PU Leather",
         price: "1 650 000 so'm",
         platform: "1688",
         category: "Mebel",
         image: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=500&q=80",
+        isLiked: false
+    },
+    {
+        id: 26,
+        title: "Oversized Cotton Casual Hoodie Unisex",
+        price: "310 000 so'm",
+        platform: "1688",
+        category: "Kiyimlar",
+        image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
+        isLiked: false
+    },
+    {
+        id: 27,
+        title: "Electric Toothbrush Sonic Rechargeable",
+        price: "140 000 so'm",
+        platform: "1688",
+        category: "Maishiy texnika",
+        image: "https://images.unsplash.com/photo-1559672170-567104f64d77?w=500&q=80",
+        isLiked: false
+    },
+    {
+        id: 28,
+        title: "Minimalist Wooden Writing Desk",
+        price: "850 000 so'm",
+        platform: "1688",
+        category: "Mebel",
+        image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=500&q=80",
+        isLiked: false
+    },
+    {
+        id: 29,
+        title: "Crossbody Leather Bag for Men",
+        price: "270 000 so'm",
+        platform: "1688",
+        category: "Aksessuarlar",
+        image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&q=80",
+        isLiked: false
+    },
+    {
+        id: 30,
+        title: "Portable Mini Projector Full HD 1080P",
+        price: "980 000 so'm",
+        platform: "1688",
+        category: "Gadjetlar",
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&q=80",
         isLiked: false
     }
 ];
@@ -187,21 +277,22 @@ let products = [
 let activePlatform = "Taobao";
 let activeCategory = "Barchasi";
 
-// LocalStorage'dan like va cart ma'lumotlarini yuklash
-function getLikedIds() {
+function getLikedProducts() {
     return JSON.parse(localStorage.getItem("karvon_likes")) || [];
+}
+function getLikedIds() {
+    return getLikedProducts().map(p => p.id);
 }
 function getCart() {
     return JSON.parse(localStorage.getItem("karvon_cart")) || [];
 }
-function saveLikedIds(likedIds) {
-    localStorage.setItem("karvon_likes", JSON.stringify(likedIds));
+function saveLikedProducts(likedProducts) {
+    localStorage.setItem("karvon_likes", JSON.stringify(likedProducts));
 }
 function saveCart(cart) {
     localStorage.setItem("karvon_cart", JSON.stringify(cart));
 }
 
-// products massividagi isLiked holatini localStorage bilan sinxronlash
 function syncLikesFromStorage() {
     const likedIds = getLikedIds();
     products.forEach(p => {
@@ -236,8 +327,6 @@ if (btnTaobao) btnTaobao.addEventListener("click", () => setPlatform("Taobao"));
 if (btn1688) btn1688.addEventListener("click", () => setPlatform("1688"));
 
 // 1.5 KATEGORIYA BO'YICHA FILTRLASH
-// Endi funksiya to'g'ridan-to'g'ri elementning o'zini (this) qabul qiladi,
-// shu tufayli apostrofli nomlar (masalan "O'yinchoqlar") onclick ichida muammo chiqarmaydi.
 window.setCategory = function (el) {
     const category = el.getAttribute("data-category");
 
@@ -269,16 +358,16 @@ window.setCategory = function (el) {
 const categoryDropdownMenu = document.getElementById("category-dropdown-menu");
 const categoryMenuChevron = document.getElementById("category-menu-chevron");
 
-// category-grid bilan bir xil ro'yxat (nom + ikonka)
 const headerCategoriesList = [
     { name: "Barchasi", icon: "fa-border-all" },
+    { name: "Yangilari", icon: "fa-border-all" },
     { name: "Gadjetlar", icon: "fa-mobile-screen" },
     { name: "Kiyimlar", icon: "fa-shirt" },
     { name: "Mebel", icon: "fa-couch" },
     { name: "Noutbuklar", icon: "fa-laptop" },
     { name: "Maishiy texnika", icon: "fa-blender" },
     { name: "O'yinchoqlar", icon: "fa-gamepad" },
-    { name: "Aksessuarlar", icon: "fa-clock" }
+    { name: "Aksessuarlar", icon: "fa-clock" },
 ];
 
 function renderCategoryDropdown() {
@@ -309,7 +398,6 @@ window.toggleCategoryMenu = function (event) {
 };
 
 window.selectCategoryFromHeader = function (categoryName) {
-    // Pastdagi kategoriya grididan mos elementni topib, mavjud setCategory logikasidan foydalanamiz
     const targetEl = categoryGrid
         ? Array.from(categoryGrid.querySelectorAll(".category-item")).find(
             item => item.getAttribute("data-category") === categoryName
@@ -327,7 +415,6 @@ window.selectCategoryFromHeader = function (categoryName) {
     if (categoryDropdownMenu) categoryDropdownMenu.classList.add("hidden");
     if (categoryMenuChevron) categoryMenuChevron.classList.remove("rotate-180");
 };
-
 // Menyudan tashqariga bosilganda uni yopish
 document.addEventListener("click", (e) => {
     if (!categoryDropdownMenu || categoryDropdownMenu.classList.contains("hidden")) return;
@@ -390,22 +477,31 @@ function renderProducts(query = "") {
     });
 }
 
-// 3. LIKE FUNKSIYASI
+// 3. LIKE FUNKSIYASI (endi to'liq mahsulot obyektini saqlaydi)
 window.toggleLike = function (id) {
     const product = products.find(p => p.id === id);
     if (!product) return;
 
     product.isLiked = !product.isLiked;
 
-    let likedIds = getLikedIds();
+    let likedProducts = getLikedProducts();
     if (product.isLiked) {
-        if (!likedIds.includes(id)) likedIds.push(id);
+        if (!likedProducts.some(p => p.id === id)) {
+            likedProducts.push({
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                image: product.image,
+                platform: product.platform,
+                category: product.category
+            });
+        }
     } else {
-        likedIds = likedIds.filter(likedId => likedId !== id);
+        likedProducts = likedProducts.filter(p => p.id !== id);
     }
-    saveLikedIds(likedIds);
+    saveLikedProducts(likedProducts);
 
-    if (likeCountBadge) likeCountBadge.textContent = likedIds.length;
+    if (likeCountBadge) likeCountBadge.textContent = likedProducts.length;
 
     renderProducts(searchInput ? searchInput.value : "");
 };
@@ -551,7 +647,7 @@ function handleConsultation(event) {
 function updateHomeHeader() {
     const userData = JSON.parse(localStorage.getItem("karvon_user"));
     const cartList = getCart();
-    const likedList = getLikedIds();
+    const likedList = getLikedProducts();
 
     if (likeCountBadge) likeCountBadge.textContent = likedList.length;
     const cartBadge = document.querySelector(".fa-bag-shopping")?.parentElement?.querySelector("span");

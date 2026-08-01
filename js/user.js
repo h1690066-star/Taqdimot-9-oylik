@@ -9,6 +9,10 @@ function getCartItems() {
     return JSON.parse(localStorage.getItem("karvon_cart")) || [];
 }
 
+// karvon_likes endi mian.js tomonidan TO'LIQ mahsulot obyektlari
+// (id, title, price, image, platform, category) massivi sifatida
+// saqlanadi, shuning uchun bu yerda alohida o'zgartirish shart emas -
+// faqat mian.js bilan formatni moslashtirish kifoya edi.
 function getLikedItems() {
     return JSON.parse(localStorage.getItem("karvon_likes")) || [];
 }
