@@ -1,4 +1,3 @@
-
 let catalogProducts = [
   {
     id: 1,
@@ -1449,7 +1448,6 @@ const searchInput = document.getElementById("search-input");
 const voiceSearchBtn = document.getElementById("voice-search-btn");
 const imageUploadInput = document.getElementById("image-upload");
 
-// Header hisoblagichlarini yangilash funksiyasi
 function updateHeaderBadges() {
   const cartBadge = document.querySelector(".fa-bag-shopping + span");
   const likeBadge = document.getElementById("like-count");
@@ -1458,9 +1456,6 @@ function updateHeaderBadges() {
   if (likeBadge) likeBadge.textContent = likedList.length;
 }
 
-// ==========================================
-// 3. FILTER MANTIG'I
-// ==========================================
 window.filterByPlatform = function (platform) {
   selectedPlatform = platform;
   applyFilters();
@@ -1510,9 +1505,6 @@ window.applyFilters = function () {
   renderCatalog(filtered, multiplier);
 };
 
-// ==========================================
-// 4. KARTALARNI RENDER QILISH
-// ==========================================
 function renderCatalog(items, multiplier) {
   if (!catalogGrid) return;
   catalogGrid.innerHTML = "";
@@ -1526,7 +1518,6 @@ function renderCatalog(items, multiplier) {
     const calculatedPrice = Math.round(product.basePrice * multiplier);
     const formattedPrice = calculatedPrice.toLocaleString("uz-UZ") + " so'm";
 
-    // Mahsulot avval saqlanganlar (liked) ro'yxatida bormi?
     const isLiked = likedList.some((p) => p.id === product.id);
 
     const card = document.createElement("div");
@@ -1555,7 +1546,7 @@ function renderCatalog(items, multiplier) {
           </div>
 
           <h3 class="text-xs font-semibold text-zinc-200 line-clamp-2 leading-snug">
-            ${product.title}
+            ${product.title}  
           </h3>
         </div>
 

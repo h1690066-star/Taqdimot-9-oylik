@@ -5,7 +5,7 @@ let products = [
         title: "Premium Mexanik Klaviatura K3 RGB",
         price: "450 000 so'm",
         platform: "Taobao",
-        category: "Elektronika",
+        category: "Gadjetlar",
         image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&q=80",
         isLiked: false
     },
@@ -23,7 +23,7 @@ let products = [
         title: "Wireless Gaming Mouse RGB Lighting",
         price: "280 000 so'm",
         platform: "Taobao",
-        category: "Elektronika",
+        category: "Gadjetlar",
         image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500&q=80",
         isLiked: false
     },
@@ -32,7 +32,7 @@ let products = [
         title: "Minimalist Desk LED Lamp with Wireless Charger",
         price: "320 000 so'm",
         platform: "Taobao",
-        category: "Uy-ro'zg'or",
+        category: "Gadjetlar",
         image: "https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?w=500&q=80",
         isLiked: false
     },
@@ -59,7 +59,7 @@ let products = [
         title: "Portable Bluetooth Speaker Waterproof IPX7",
         price: "380 000 so'm",
         platform: "Taobao",
-        category: "Elektronika",
+        category: "Gadjetlar",
         image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80",
         isLiked: false
     },
@@ -77,7 +77,7 @@ let products = [
         title: "HD Web Camera 1080P with Built-in Microphone",
         price: "210 000 so'm",
         platform: "Taobao",
-        category: "Elektronika",
+        category: "Gadjetlar",
         image: "https://images.unsplash.com/photo-1587826080692-f439cd0b70da?w=500&q=80",
         isLiked: false
     },
@@ -95,9 +95,9 @@ let products = [
     {
         id: 11,
         title: "Luxe Edition Urban Sneakers",
-        price: "680 000 so me",
+        price: "680 000 so'm",
         platform: "1688",
-        category: "Poyabzal",
+        category: "Kiyimlar",
         image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80",
         isLiked: false
     },
@@ -106,7 +106,7 @@ let products = [
         title: "Professional 4K Mirrorless Camera Kit",
         price: "12 400 000 so'm",
         platform: "1688",
-        category: "Elektronika",
+        category: "Gadjetlar",
         image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80",
         isLiked: false
     },
@@ -115,7 +115,7 @@ let products = [
         title: "Waterproof Travel Backpack with USB Port",
         price: "240 000 so'm",
         platform: "1688",
-        category: "Sumkalar",
+        category: "Aksessuarlar",
         image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80",
         isLiked: false
     },
@@ -124,7 +124,7 @@ let products = [
         title: "Classic Leather Men's Jacket Vintage Style",
         price: "950 000 so'm",
         platform: "1688",
-        category: "Kiyim-kechak",
+        category: "Kiyimlar",
         image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&q=80",
         isLiked: false
     },
@@ -142,7 +142,7 @@ let products = [
         title: "Stainless Steel Smart Thermos Bottle 500ml",
         price: "110 000 so'm",
         platform: "1688",
-        category: "Uy-ro'zg'or",
+        category: "Maishiy texnika",
         image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&q=80",
         isLiked: false
     },
@@ -160,7 +160,7 @@ let products = [
         title: "Professional Drone 4K Camera GPS Quadcopter",
         price: "3 450 000 so'm",
         platform: "1688",
-        category: "Elektronika",
+        category: "Gadjetlar",
         image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=500&q=80",
         isLiked: false
     },
@@ -236,7 +236,11 @@ if (btnTaobao) btnTaobao.addEventListener("click", () => setPlatform("Taobao"));
 if (btn1688) btn1688.addEventListener("click", () => setPlatform("1688"));
 
 // 1.5 KATEGORIYA BO'YICHA FILTRLASH
-window.setCategory = function (category, el) {
+// Endi funksiya to'g'ridan-to'g'ri elementning o'zini (this) qabul qiladi,
+// shu tufayli apostrofli nomlar (masalan "O'yinchoqlar") onclick ichida muammo chiqarmaydi.
+window.setCategory = function (el) {
+    const category = el.getAttribute("data-category");
+
     // Xuddi shu kategoriya ustiga qayta bosilsa -> "Barchasi"ga qaytadi
     activeCategory = (activeCategory === category && category !== "Barchasi") ? "Barchasi" : category;
 
@@ -260,6 +264,82 @@ window.setCategory = function (category, el) {
         productList.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 };
+
+// 1.6 HEADERDAGI KATEGORIYA DROPDOWN MENYUSI
+const categoryDropdownMenu = document.getElementById("category-dropdown-menu");
+const categoryMenuChevron = document.getElementById("category-menu-chevron");
+
+// category-grid bilan bir xil ro'yxat (nom + ikonka)
+const headerCategoriesList = [
+    { name: "Barchasi", icon: "fa-border-all" },
+    { name: "Gadjetlar", icon: "fa-mobile-screen" },
+    { name: "Kiyimlar", icon: "fa-shirt" },
+    { name: "Mebel", icon: "fa-couch" },
+    { name: "Noutbuklar", icon: "fa-laptop" },
+    { name: "Maishiy texnika", icon: "fa-blender" },
+    { name: "O'yinchoqlar", icon: "fa-gamepad" },
+    { name: "Aksessuarlar", icon: "fa-clock" }
+];
+
+function renderCategoryDropdown() {
+    if (!categoryDropdownMenu) return;
+
+    categoryDropdownMenu.innerHTML = headerCategoriesList.map(cat => {
+        const isActive = activeCategory === cat.name;
+        return `
+            <button onclick="selectCategoryFromHeader('${cat.name.replace(/'/g, "\\'")}')"
+                class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left transition ${isActive ? 'text-amber-400 bg-amber-500/10' : 'text-zinc-300 hover:bg-zinc-800'}">
+                <i class="fa-solid ${cat.icon} w-4 text-center text-xs"></i>
+                <span>${cat.name}</span>
+            </button>
+        `;
+    }).join("");
+}
+
+window.toggleCategoryMenu = function (event) {
+    if (event) event.stopPropagation();
+    if (!categoryDropdownMenu) return;
+
+    const isHidden = categoryDropdownMenu.classList.contains("hidden");
+    if (isHidden) {
+        renderCategoryDropdown();
+    }
+    categoryDropdownMenu.classList.toggle("hidden");
+    if (categoryMenuChevron) categoryMenuChevron.classList.toggle("rotate-180");
+};
+
+window.selectCategoryFromHeader = function (categoryName) {
+    // Pastdagi kategoriya grididan mos elementni topib, mavjud setCategory logikasidan foydalanamiz
+    const targetEl = categoryGrid
+        ? Array.from(categoryGrid.querySelectorAll(".category-item")).find(
+            item => item.getAttribute("data-category") === categoryName
+        )
+        : null;
+
+    if (targetEl) {
+        setCategory(targetEl);
+    } else {
+        activeCategory = categoryName;
+        renderProducts(searchInput ? searchInput.value : "");
+        if (productList) productList.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    if (categoryDropdownMenu) categoryDropdownMenu.classList.add("hidden");
+    if (categoryMenuChevron) categoryMenuChevron.classList.remove("rotate-180");
+};
+
+// Menyudan tashqariga bosilganda uni yopish
+document.addEventListener("click", (e) => {
+    if (!categoryDropdownMenu || categoryDropdownMenu.classList.contains("hidden")) return;
+
+    const isClickInsideMenu = categoryDropdownMenu.contains(e.target);
+    const isClickOnButton = e.target.closest("#btn-categories-mobile, #btn-categories-desktop");
+
+    if (!isClickInsideMenu && !isClickOnButton) {
+        categoryDropdownMenu.classList.add("hidden");
+        if (categoryMenuChevron) categoryMenuChevron.classList.remove("rotate-180");
+    }
+});
 
 // 2. MAHSULOTLARNI RENDER QILISH
 function renderProducts(query = "") {
