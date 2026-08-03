@@ -360,7 +360,6 @@ const categoryMenuChevron = document.getElementById("category-menu-chevron");
 
 const headerCategoriesList = [
     { name: "Barchasi", icon: "fa-border-all" },
-    { name: "Yangilari", icon: "fa-border-all" },
     { name: "Gadjetlar", icon: "fa-mobile-screen" },
     { name: "Kiyimlar", icon: "fa-shirt" },
     { name: "Mebel", icon: "fa-couch" },

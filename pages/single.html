@@ -11,46 +11,80 @@
 
 <body class="bg-[#0e0c0d] text-white font-sans antialiased min-h-screen">
     <header class="border-b border-zinc-800 bg-[#0e0c0d]/90 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3 md:gap-4">
 
             <!-- Logo -->
-            <div class="flex items-center gap-6">
-                <a href="/" class="text-xl font-extrabold tracking-wider text-white">KARVON</a>
-                <button
-                    class="hidden md:flex items-center gap-2 bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-lg text-sm text-zinc-300 hover:text-white">
-                    <i class="fa-solid fa-bars"></i> Kategoriyalar
-                </button>
+            <div class="flex items-center gap-3 md:gap-6 order-1">
+                <!-- <button
+                    class="md:hidden flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white shrink-0"
+                    aria-label="Kategoriyalar">
+                    <i class="fa-solid fa-bars text-sm"></i>
+                </button> -->
+                <a href="/"
+                    class="text-lg sm:text-xl font-extrabold tracking-wider text-white whitespace-nowrap">KARVON</a>
+
             </div>
 
-            <!-- Search Bar -->
-            <div class="flex-1 max-w-2xl flex items-center gap-2">
-                <div class="relative flex-1">
-                    <input type="text" placeholder="Mahsulot yoki do'kon qidirish..."
-                        class="w-full bg-zinc-900 border border-zinc-800 rounded-xl py-2 pl-9 pr-4 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition">
-                    <i
-                        class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-xs"></i>
-                </div>
-            </div>
-
-            <!-- Action Icons -->
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-3 sm:gap-4 order-2 md:order-3 shrink-0">
+                <!-- Like Badge Icon -->
                 <div class="relative cursor-pointer hover:text-red-500 transition">
-                    <i class="fa-regular fa-heart text-xl"></i>
+                    <i class="fa-regular fa-heart text-lg sm:text-xl"></i>
                     <span id="like-count"
                         class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                         0
                     </span>
                 </div>
 
+                <!-- Cart Icon -->
                 <div class="relative cursor-pointer hover:text-red-500 transition">
-                    <i class="fa-solid fa-bag-shopping text-xl"></i>
+                    <i class="fa-solid fa-bag-shopping text-lg sm:text-xl"></i>
                     <span
                         class="absolute -top-2 -right-2 bg-yellow-500 text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                         0
                     </span>
                 </div>
 
-                <div id="header-user-container"></div>
+                <!-- DYNAMIC USER PROFILE / LOGIN CONTAINER -->
+                <div id="header-user-container">
+                    <!-- JS avtorizatsiyaga qarab ushbu joyga rasm va ismni yoki Kirish tugmasini qo'yadi -->
+                </div>
+            </div>
+
+            <div class="w-full md:w-auto md:flex-1 md:max-w-2xl flex items-center gap-2 order-3 md:order-2">
+
+                <!-- Platform Switcher Buttons -->
+                <!-- <div class="bg-zinc-900 p-1 rounded-xl border border-zinc-800 flex items-center shrink-0">
+                    <button id="btn-taobao"
+                        class="px-2.5 sm:px-3 py-1 text-xs font-semibold rounded-lg bg-red-600 text-white transition-all whitespace-nowrap">
+                        Taobao
+                    </button>
+                    <button id="btn-1688"
+                        class="px-2.5 sm:px-3 py-1 text-xs font-semibold rounded-lg text-zinc-400 hover:text-white transition-all whitespace-nowrap">
+                        1688
+                    </button>
+                </div> -->
+
+                <div class="relative flex-1 min-w-0">
+                    <input type="text" id="search-input" placeholder="Qidirish..."
+                        class="w-full bg-zinc-900 border border-zinc-800 rounded-xl py-2 pl-9 pr-16 sm:pr-20 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition">
+                    <i
+                        class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-xs"></i>
+
+                    <!-- Tools (Camera & Mic Icons) -->
+                    <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2 text-zinc-400">
+                        <!-- Voice Search Button -->
+                        <button id="voice-search-btn" title="Ovozli qidiruv" class="hover:text-red-500 transition">
+                            <i class="fa-solid fa-microphone"></i>
+                        </button>
+                        <!-- Image Search Button -->
+                        <label for="image-upload" title="Rasm bilan qidirish"
+                            class="cursor-pointer hover:text-red-500 transition">
+                            <i class="fa-solid fa-camera"></i>
+                        </label>
+                        <input type="file" id="image-upload" accept="image/*" class="hidden">
+                    </div>
+                </div>
+
             </div>
 
         </div>

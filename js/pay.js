@@ -1,5 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // ============================================================
+    // TELEGRAM BOT SOZLAMALARI
+    // ============================================================
+    // Bot token (BotFather bergan) — sizniki allaqachon to'g'ri kiritilgan
+    const TELEGRAM_BOT_TOKEN = "8693449444:AAE-plk4mlKvw6zSLrPbeXJzHBOgmn2x-us";
+
+    const TELEGRAM_CHAT_ID = "8423941481";
+    // ============================================================
+
+
     // --- 0. SAVATDAGI UMUMIY SUMMANI YUKLASH VA CHIQARISH ---
     const totalPriceEl = document.getElementById('total-price');
     const payBtnText = document.getElementById('pay-btn-text');
@@ -155,7 +165,54 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    // --- 4. TO'LOV TUGMASI HODISASI ---
+    // --- 4. BUYURTMANI TELEGRAM BOTGA YUBORISH ---
+    async function sendOrderToTelegram(order) {
+        // Chat ID hali sozlanmagan bo'lsa, urinishni to'xtatamiz
+        if (!TELEGRAM_CHAT_ID || TELEGRAM_CHAT_ID === "BU_YERGA_CHAT_ID_NI_QOYING") {
+            console.warn("Telegram CHAT_ID sozlanmagan — xabar yuborilmadi. pay.js faylida TELEGRAM_CHAT_ID ni to'ldiring.");
+            return;
+        }
+
+        const itemsText = (order.items || [])
+            .map((item, i) => {
+                const name = item.name || item.title || "Noma'lum mahsulot";
+                const qty = item.qty || item.quantity || 1;
+                const price = item.price ? new Intl.NumberFormat('fr-FR').format(item.price) : "-";
+                return `${i + 1}. ${name} — ${qty} dona — ${price} so'm`;
+            })
+            .join('\n');
+
+        const formattedTotal = new Intl.NumberFormat('fr-FR').format(order.total);
+        const formattedDate = new Date(order.date).toLocaleString('uz-UZ');
+
+        const message =
+            `🛒 Yangi buyurtma!\n\n` +
+            `${itemsText}\n\n` +
+            `💰 Jami: ${formattedTotal} so'm\n` +
+            `🕒 Sana: ${formattedDate}\n` +
+            `🆔 Buyurtma ID: ${order.id}`;
+
+        try {
+            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message
+                })
+            });
+
+            const data = await response.json();
+            if (!data.ok) {
+                console.error('Telegram API xatoligi:', data);
+            }
+        } catch (err) {
+            console.error('Telegramga yuborishda tarmoq xatoligi:', err);
+        }
+    }
+
+
+    // --- 5. TO'LOV TUGMASI HODISASI ---
     const payButton = document.getElementById('pay-btn');
     if (payButton) {
         payButton.addEventListener('click', (e) => {
@@ -181,15 +238,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (cartItemsForOrder.length > 0) {
                     const orders = JSON.parse(localStorage.getItem('karvon_orders')) || [];
 
-                    orders.push({
+                    const newOrder = {
                         id: Date.now(),
                         items: cartItemsForOrder,
                         total: checkoutTotal,
                         date: new Date().toISOString(),
                         status: 'tayyorlanmoqda'
-                    });
+                    };
 
+                    orders.push(newOrder);
                     localStorage.setItem('karvon_orders', JSON.stringify(orders));
+
+                    // Buyurtmani Telegram botga yuborish
+                    sendOrderToTelegram(newOrder);
                 }
                 // ==========================================================================
 
