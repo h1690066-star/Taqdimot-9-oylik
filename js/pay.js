@@ -172,6 +172,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 4. YORDAMCHI FUNKSIYALAR ---
 
+    // Narxni har qanday formatdan (string, bo'sh joy, vergul va h.k.) tozalab, raqamga aylantiradi
+    // (NaN muammosining oldini olish uchun qo'shildi)
+    function toNumber(value) {
+        if (value === null || value === undefined) return 0;
+        if (typeof value === 'number') return isNaN(value) ? 0 : value;
+        const cleaned = String(value)
+            .replace(/\s/g, '')
+            .replace(/[^\d.,-]/g, '')
+            .replace(',', '.');
+        const num = parseFloat(cleaned);
+        return isNaN(num) ? 0 : num;
+    }
+
     // Har xil mahsulot obyektlaridan kerakli maydonni topib olish
     // (chunki savatdagi obyektlarda maydon nomlari turlicha bo'lishi mumkin: image/img/photo/src)
     function getItemImage(item) {
@@ -194,9 +207,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Bitta mahsulot uchun chiroyli formatlangan matn bo'lagi
     function buildItemBlock(item, index) {
         const name = item.name || item.title || "Noma'lum mahsulot";
-        const qty = item.qty || item.quantity || 1;
-        const price = item.price ? new Intl.NumberFormat('fr-FR').format(item.price) : "-";
-        const subtotal = item.price ? new Intl.NumberFormat('fr-FR').format(item.price * qty) : "-";
+        const qty = toNumber(item.qty || item.quantity || 1) || 1;
+        const priceNum = toNumber(item.price);
+        const price = new Intl.NumberFormat('fr-FR').format(priceNum);
+        const subtotal = new Intl.NumberFormat('fr-FR').format(priceNum * qty);
         const id = getItemId(item);
         const image = getItemImage(item);
 
@@ -246,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const items = order.items || [];
-        const formattedTotal = new Intl.NumberFormat('fr-FR').format(order.total);
+        const formattedTotal = new Intl.NumberFormat('fr-FR').format(toNumber(order.total));
         const formattedDate = new Date(order.date).toLocaleString('uz-UZ', {
             day: '2-digit', month: '2-digit', year: 'numeric',
             hour: '2-digit', minute: '2-digit'
@@ -263,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `💰 <b>Jami summa:</b> ${formattedTotal} so'm\n`;
 
         if (order.promo) {
-            message += `🎁 <b>Promokod:</b> ${order.promo.code} (-${new Intl.NumberFormat('fr-FR').format(order.promo.discountAmount)} so'm)\n`;
+            message += `🎁 <b>Promokod:</b> ${order.promo.code} (-${new Intl.NumberFormat('fr-FR').format(toNumber(order.promo.discountAmount))} so'm)\n`;
         }
 
         message +=
@@ -287,8 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!image) continue;
 
             const name = item.name || item.title || "Noma'lum mahsulot";
-            const qty = item.qty || item.quantity || 1;
-            const price = item.price ? new Intl.NumberFormat('fr-FR').format(item.price) : "-";
+            const qty = toNumber(item.qty || item.quantity || 1) || 1;
+            const price = new Intl.NumberFormat('fr-FR').format(toNumber(item.price));
             const id = getItemId(item);
 
             const caption =
