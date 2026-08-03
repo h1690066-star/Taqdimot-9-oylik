@@ -300,6 +300,16 @@ function syncLikesFromStorage() {
     });
 }
 
+// Narx satridan raqamni ajratib olish (masalan "1 250 000 so'm" -> 1250000)
+function parsePriceToNumber(priceStr) {
+    return parseInt(String(priceStr).replace(/[^\d]/g, ""), 10) || 0;
+}
+
+// Mahsulot uchun barqaror (id ga bog'liq) reyting hosil qilish
+function getProductRating(product) {
+    return (4.5 + (product.id % 5) * 0.1).toFixed(1);
+}
+
 // DOM ELEMENTLAR
 const btnTaobao = document.getElementById("btn-taobao");
 const btn1688 = document.getElementById("btn-1688");
@@ -427,7 +437,7 @@ document.addEventListener("click", (e) => {
     }
 });
 
-// 2. MAHSULOTLARNI RENDER QILISH
+// 2. MAHSULOTLARNI RENDER QILISH (YANGI DIZAYN)
 function renderProducts(query = "") {
     if (!productList) return;
     productList.innerHTML = "";
@@ -444,31 +454,63 @@ function renderProducts(query = "") {
         return;
     }
 
+    const cartIds = getCart().map(item => item.id);
+
     filteredProducts.forEach(product => {
+        const isLiked = product.isLiked;
+        const rating = getProductRating(product);
+        const currentShipping = product.platform;
+        const formattedPrice = product.price;
+        const calculatedPrice = parsePriceToNumber(product.price);
+        const inCart = cartIds.includes(product.id);
+
         const card = document.createElement("div");
-        card.className = "bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden group hover:border-zinc-700 transition flex flex-col justify-between";
+        card.className = "relative bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden group hover:border-zinc-700 transition flex flex-col justify-between";
 
         card.innerHTML = `
-      <div>
-        <div class="relative h-48 overflow-hidden bg-zinc-800">
-          <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          <span class="absolute top-2 left-2 bg-black/60 text-xs px-2 py-0.5 rounded text-zinc-300">${product.platform}</span>
- 
-          <button onclick="toggleLike(${product.id})" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black transition">
-            <i class="${product.isLiked ? 'fa-solid text-red-500' : 'fa-regular'} fa-heart"></i>
+      <a href="./single.html?id=${product.id}" class="absolute inset-0 z-10"></a>
+
+      <div class="relative h-48 bg-zinc-800 overflow-hidden">
+        <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+        <span class="absolute top-2 left-2 bg-black/60 backdrop-blur text-[10px] text-amber-400 font-bold px-2 py-0.5 rounded border border-amber-500/30 uppercase">
+          ${currentShipping}
+        </span>
+
+        <!-- Like Tugmasi -->
+        <button onclick="toggleCatalogLike(this, ${product.id})" class="absolute top-2 right-2 z-20 w-7 h-7 rounded-full bg-black/50 backdrop-blur flex items-center justify-center transition">
+          <i class="${isLiked ? "fa-solid text-red-500" : "fa-regular text-zinc-300"} fa-heart text-xs"></i>
+        </button>
+      </div>
+
+      <div class="p-4 space-y-2">
+        <div class="flex items-center justify-between text-[11px] text-zinc-500">
+          <span>${product.platform} • ${product.category}</span>
+          <span class="text-amber-500 font-bold flex items-center gap-0.5">
+            <i class="fa-solid fa-star text-[9px]"></i> ${rating}
+          </span>
+        </div>
+
+        <h3 class="text-xs font-semibold text-zinc-200 line-clamp-2 leading-snug">
+          ${product.title}
+        </h3>
+      </div>
+
+      <div class="p-4 pt-0 space-y-3">
+        <div class="bg-zinc-950/60 rounded-xl p-2.5 border border-zinc-800/50">
+          <div class="text-[9px] text-zinc-500 uppercase font-bold tracking-wider">Yakuniy Narx</div>
+          <div class="text-sm font-black text-white mt-0.5">${formattedPrice}</div>
+        </div>
+
+        <!-- Action Tugmalar -->
+        <div class="grid grid-cols-2 gap-2 relative z-20">
+          <a href="./single.html?id=${product.id}" class="w-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-semibold text-xs py-2.5 rounded-xl transition flex items-center justify-center gap-1.5 border border-zinc-700/50">
+            <i class="fa-solid fa-circle-info text-[11px]"></i> Batafsil
+          </a>
+
+          <button id="cart-btn-${product.id}" onclick="addToCart(this, ${product.id}, ${calculatedPrice})" class="w-full ${inCart ? 'bg-green-600 text-white' : 'bg-zinc-800 hover:bg-red-600 text-zinc-300 hover:text-white'} font-semibold text-xs py-2.5 rounded-xl transition flex items-center justify-center gap-1.5">
+            <i class="fa-solid ${inCart ? 'fa-check' : 'fa-cart-shopping'} text-[11px]"></i> ${inCart ? 'Savatda!' : 'Savatga'}
           </button>
         </div>
- 
-        <div class="p-4">
-          <span class="inline-block text-[10px] text-amber-500 font-semibold uppercase tracking-wide mb-1">${product.category}</span>
-          <h3 class="font-medium text-sm text-zinc-200 line-clamp-2 mb-2">${product.title}</h3>
-          <div class="text-lg font-bold text-white mb-3">${product.price}</div>
-        </div>
-      </div>
-      <div class="px-4 pb-4">
-        <button onclick="addToCart(${product.id})" class="w-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs py-2 rounded-lg transition font-medium">
-          Savatga qo'shish
-        </button>
       </div>
     `;
 
@@ -476,8 +518,8 @@ function renderProducts(query = "") {
     });
 }
 
-// 3. LIKE FUNKSIYASI (endi to'liq mahsulot obyektini saqlaydi)
-window.toggleLike = function (id) {
+// 3. LIKE FUNKSIYASI (kartochka ichida, DOM'ni to'liq qayta chizmasdan)
+window.toggleCatalogLike = function (btnEl, id) {
     const product = products.find(p => p.id === id);
     if (!product) return;
 
@@ -502,11 +544,28 @@ window.toggleLike = function (id) {
 
     if (likeCountBadge) likeCountBadge.textContent = likedProducts.length;
 
-    renderProducts(searchInput ? searchInput.value : "");
+    const icon = btnEl.querySelector("i");
+    if (icon) {
+        if (product.isLiked) {
+            icon.classList.remove("fa-regular", "text-zinc-300");
+            icon.classList.add("fa-solid", "text-red-500");
+        } else {
+            icon.classList.remove("fa-solid", "text-red-500");
+            icon.classList.add("fa-regular", "text-zinc-300");
+        }
+    }
 };
 
-// 4. SAVATGA QO'SHISH FUNKSIYASI (alertsiz)
-window.addToCart = function (id) {
+// Eski nom bilan ham ishlashi uchun (agar boshqa joyda chaqirilsa)
+window.toggleLike = function (id) {
+    const btn = document.querySelector(`button[onclick="toggleCatalogLike(this, ${id})"]`);
+    if (btn) {
+        window.toggleCatalogLike(btn, id);
+    }
+};
+
+// 4. SAVATGA QO'SHISH FUNKSIYASI (tugma joyida "Savatda!" ga aylanadi)
+window.addToCart = function (btnEl, id, priceValue) {
     const product = products.find(p => p.id === id);
     if (!product) return;
 
@@ -529,6 +588,20 @@ window.addToCart = function (id) {
 
     const cartBadge = document.querySelector(".fa-bag-shopping")?.parentElement?.querySelector("span");
     if (cartBadge) cartBadge.textContent = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+
+    if (btnEl) {
+        btnEl.classList.remove("bg-zinc-800", "hover:bg-red-600", "text-zinc-300", "hover:text-white");
+        btnEl.classList.add("bg-green-600", "text-white");
+        btnEl.innerHTML = `<i class="fa-solid fa-check text-[11px]"></i> Savatda!`;
+
+        // 2 soniyadan keyin tugma asl "Savatga" holatiga qaytadi
+        clearTimeout(btnEl._resetTimer);
+        btnEl._resetTimer = setTimeout(() => {
+            btnEl.classList.remove("bg-green-600", "text-white");
+            btnEl.classList.add("bg-zinc-800", "hover:bg-red-600", "text-zinc-300", "hover:text-white");
+            btnEl.innerHTML = `<i class="fa-solid fa-cart-shopping text-[11px]"></i> Savatga`;
+        }, 2000);
+    }
 };
 
 // 5. MATN QIDIRUVI (Input)
