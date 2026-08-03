@@ -71,6 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const promoBtn = document.getElementById('apply-promo-btn');
     const promoBadgeContainer = document.getElementById('promo-badge-container');
 
+    // Qo'llanilgan promokodni keyinroq Telegram xabarida ko'rsatish uchun saqlab qo'yamiz
+    let appliedPromo = null;
+
     if (promoBtn && promoInput) {
         promoBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -80,6 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const originalPrice = parseFloat(totalPriceEl.dataset.originalPrice);
                 const discountAmount = originalPrice * 0.20;
                 const finalPrice = originalPrice - discountAmount;
+
+                appliedPromo = { code, discountAmount, finalPrice };
 
                 const formattedDiscount = new Intl.NumberFormat('fr-FR').format(discountAmount);
                 const formattedFinal = new Intl.NumberFormat('fr-FR').format(finalPrice);
@@ -145,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <i class="fa-solid fa-circle-check text-4xl"></i>
           </div>
           <h3 class="text-lg font-bold text-white leading-snug">
-            To'lov Amalga Oshirildi ☺
+            To'lov Amalga Oshirildi 
           </h3>
           <p class="text-xs text-gray-400">
             Xaridingiz uchun rahmat! Buyurtmangiz muvaffaqiyatli qabul qilindi.
@@ -165,7 +170,74 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    // --- 4. BUYURTMANI TELEGRAM BOTGA YUBORISH ---
+    // --- 4. YORDAMCHI FUNKSIYALAR ---
+
+    // Har xil mahsulot obyektlaridan kerakli maydonni topib olish
+    // (chunki savatdagi obyektlarda maydon nomlari turlicha bo'lishi mumkin: image/img/photo/src)
+    function getItemImage(item) {
+        return item.image || item.img || item.photo || item.picture || item.src || null;
+    }
+
+    function getItemId(item) {
+        return item.id || item.productId || item.sku || '—';
+    }
+
+    function getSelectedPaymentMethod() {
+        const checked = document.querySelector('main section:first-child input[type="radio"]:checked');
+        if (!checked) return "Tanlanmagan";
+        const label = checked.closest('label');
+        // Label ichidagi matndan usul nomini olishga harakat qilamiz
+        const text = label ? label.textContent.trim().replace(/\s+/g, ' ') : '';
+        return text || "Noma'lum";
+    }
+
+    // Bitta mahsulot uchun chiroyli formatlangan matn bo'lagi
+    function buildItemBlock(item, index) {
+        const name = item.name || item.title || "Noma'lum mahsulot";
+        const qty = item.qty || item.quantity || 1;
+        const price = item.price ? new Intl.NumberFormat('fr-FR').format(item.price) : "-";
+        const subtotal = item.price ? new Intl.NumberFormat('fr-FR').format(item.price * qty) : "-";
+        const id = getItemId(item);
+        const image = getItemImage(item);
+
+        return (
+            `${index + 1}. 🛍 <b>${name}</b>\n` +
+            `   🆔 ID: <code>${id}</code>\n` +
+            `   📦 Soni: ${qty} dona\n` +
+            `   💵 Narxi: ${price} so'm (jami: ${subtotal} so'm)\n` +
+            (image ? `   🖼 Rasm: ${image}\n` : ``)
+        );
+    }
+
+    // Telegramga oddiy matnli xabar yuborish
+    async function sendTelegramMessage(text) {
+        return fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: text,
+                parse_mode: 'HTML'
+            })
+        }).then(r => r.json());
+    }
+
+    // Bitta mahsulot rasmini caption bilan birga yuborish
+    async function sendTelegramPhoto(imageUrl, caption) {
+        return fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                photo: imageUrl,
+                caption: caption,
+                parse_mode: 'HTML'
+            })
+        }).then(r => r.json());
+    }
+
+
+    // --- 5. BUYURTMANI TELEGRAM BOTGA YUBORISH ---
     async function sendOrderToTelegram(order) {
         // Chat ID hali sozlanmagan bo'lsa, urinishni to'xtatamiz
         if (!TELEGRAM_CHAT_ID || TELEGRAM_CHAT_ID === "BU_YERGA_CHAT_ID_NI_QOYING") {
@@ -173,46 +245,72 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const itemsText = (order.items || [])
-            .map((item, i) => {
-                const name = item.name || item.title || "Noma'lum mahsulot";
-                const qty = item.qty || item.quantity || 1;
-                const price = item.price ? new Intl.NumberFormat('fr-FR').format(item.price) : "-";
-                return `${i + 1}. ${name} — ${qty} dona — ${price} so'm`;
-            })
-            .join('\n');
-
+        const items = order.items || [];
         const formattedTotal = new Intl.NumberFormat('fr-FR').format(order.total);
-        const formattedDate = new Date(order.date).toLocaleString('uz-UZ');
+        const formattedDate = new Date(order.date).toLocaleString('uz-UZ', {
+            day: '2-digit', month: '2-digit', year: 'numeric',
+            hour: '2-digit', minute: '2-digit'
+        });
+        const paymentMethod = getSelectedPaymentMethod();
 
-        const message =
-            `🛒 Yangi buyurtma!\n\n` +
-            `${itemsText}\n\n` +
-            `💰 Jami: ${formattedTotal} so'm\n` +
-            `🕒 Sana: ${formattedDate}\n` +
-            `🆔 Buyurtma ID: ${order.id}`;
+        // --- Bosh xabar: buyurtma haqida umumiy ma'lumot + har bir mahsulot ---
+        const itemsText = items.map((item, i) => buildItemBlock(item, i)).join('\n');
+
+        let message =
+            `🛒 <b>Yangi buyurtma!</b>\n\n` +
+            `${itemsText}\n` +
+            `━━━━━━━━━━━━━━━\n` +
+            `💰 <b>Jami summa:</b> ${formattedTotal} so'm\n`;
+
+        if (order.promo) {
+            message += `🎁 <b>Promokod:</b> ${order.promo.code} (-${new Intl.NumberFormat('fr-FR').format(order.promo.discountAmount)} so'm)\n`;
+        }
+
+        message +=
+            `💳 <b>To'lov usuli:</b> ${paymentMethod}\n` +
+            `🕒 <b>Sana:</b> ${formattedDate}\n` +
+            `🆔 <b>Buyurtma ID:</b> <code>${order.id}</code>\n` +
+            `📦 <b>Status:</b> ${order.status}`;
 
         try {
-            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: message
-                })
-            });
-
-            const data = await response.json();
-            if (!data.ok) {
-                console.error('Telegram API xatoligi:', data);
+            const res = await sendTelegramMessage(message);
+            if (!res.ok) {
+                console.error('Telegram API xatoligi (matn):', res);
             }
         } catch (err) {
-            console.error('Telegramga yuborishda tarmoq xatoligi:', err);
+            console.error('Telegramga yuborishda tarmoq xatoligi (matn):', err);
+        }
+
+        // --- Har bir mahsulotning rasmini alohida, o'z tavsifi bilan yuborish ---
+        for (const item of items) {
+            const image = getItemImage(item);
+            if (!image) continue;
+
+            const name = item.name || item.title || "Noma'lum mahsulot";
+            const qty = item.qty || item.quantity || 1;
+            const price = item.price ? new Intl.NumberFormat('fr-FR').format(item.price) : "-";
+            const id = getItemId(item);
+
+            const caption =
+                `🛍 <b>${name}</b>\n` +
+                `🆔 ID: <code>${id}</code>\n` +
+                `📦 Soni: ${qty} dona\n` +
+                `💵 Narxi: ${price} so'm\n` +
+                `🆔 Buyurtma: <code>${order.id}</code>`;
+
+            try {
+                const res = await sendTelegramPhoto(image, caption);
+                if (!res.ok) {
+                    console.error('Telegram API xatoligi (rasm):', res, image);
+                }
+            } catch (err) {
+                console.error('Telegramga rasm yuborishda tarmoq xatoligi:', err);
+            }
         }
     }
 
 
-    // --- 5. TO'LOV TUGMASI HODISASI ---
+    // --- 6. TO'LOV TUGMASI HODISASI ---
     const payButton = document.getElementById('pay-btn');
     if (payButton) {
         payButton.addEventListener('click', (e) => {
@@ -243,7 +341,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         items: cartItemsForOrder,
                         total: checkoutTotal,
                         date: new Date().toISOString(),
-                        status: 'tayyorlanmoqda'
+                        status: 'tayyorlanmoqda',
+                        paymentMethod: getSelectedPaymentMethod(),
+                        promo: appliedPromo
                     };
 
                     orders.push(newOrder);
