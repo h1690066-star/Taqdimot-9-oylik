@@ -468,8 +468,7 @@ function renderProducts(query = "") {
         card.className = "relative bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden group hover:border-zinc-700 transition flex flex-col justify-between";
 
         card.innerHTML = `
-      <a href="./single.html?id=${product.id}" class="absolute inset-0 z-10"></a>
-
+      
       <div class="relative h-48 bg-zinc-800 overflow-hidden">
         <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
         <span class="absolute top-2 left-2 bg-black/60 backdrop-blur text-[10px] text-amber-400 font-bold px-2 py-0.5 rounded border border-amber-500/30 uppercase">
@@ -502,11 +501,7 @@ function renderProducts(query = "") {
         </div>
 
         <!-- Action Tugmalar -->
-        <div class="grid grid-cols-2 gap-2 relative z-20">
-          <a href="./single.html?id=${product.id}" class="w-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-semibold text-xs py-2.5 rounded-xl transition flex items-center justify-center gap-1.5 border border-zinc-700/50">
-            <i class="fa-solid fa-circle-info text-[11px]"></i> Batafsil
-          </a>
-
+        <div class=" relative z-20">
           <button id="cart-btn-${product.id}" onclick="addToCart(this, ${product.id}, ${calculatedPrice})" class="w-full ${inCart ? 'bg-green-600 text-white' : 'bg-zinc-800 hover:bg-red-600 text-zinc-300 hover:text-white'} font-semibold text-xs py-2.5 rounded-xl transition flex items-center justify-center gap-1.5">
             <i class="fa-solid ${inCart ? 'fa-check' : 'fa-cart-shopping'} text-[11px]"></i> ${inCart ? 'Savatda!' : 'Savatga'}
           </button>
