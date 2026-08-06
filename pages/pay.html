@@ -33,11 +33,61 @@
     </style>
     
     <link rel="icon" type="image/svg+xml" href="../images/image.png">
+    <link rel="stylesheet" href="../css/load.css">
 </head>
 
 <body class="min-h-screen bg-dark text-gray-200 antialiased p-4 md:p-8">
+<div class="stage">
+        <div class="grid"></div>
 
-    <header class="max-w-6xl mx-auto flex justify-between items-center pb-8 border-b border-card-border mb-8">
+        <div class="badge-wrap">
+            <div class="badge-ring"></div>
+            <div class="badge-ring spin"></div>
+            <div class="badge">
+                <svg viewBox="0 0 64 64" fill="none">
+                    <!-- Stilizlashtirilgan yuk mashinasi belgisi -->
+                    <rect x="6" y="26" width="30" height="16" rx="1.5" fill="#101a2e" />
+                    <path d="M36 30h10l8 8v4H36z" fill="#e0262c" />
+                    <rect x="8" y="30" width="22" height="3" fill="#f4f6fb" opacity="0.85" />
+                    <circle cx="18" cy="44" r="5" fill="#101a2e" />
+                    <circle cx="18" cy="44" r="2" fill="#f4f6fb" />
+                    <circle cx="44" cy="44" r="5" fill="#101a2e" />
+                    <circle cx="44" cy="44" r="2" fill="#f4f6fb" />
+                </svg>
+            </div>
+        </div>
+
+        <h1 class="wordmark">KAR<span>VON</span></h1>
+        <p class="tagline">Buyurtmalar xizmati</p>
+
+        <div class="road-wrap">
+            <div class="road">
+                <div class="road-line"></div>
+                <div class="progress-fill"></div>
+                <div class="truck">
+                    <svg viewBox="0 0 48 32" fill="none">
+                        <rect x="2" y="6" width="20" height="14" rx="1.2" fill="#f4f6fb" />
+                        <path d="M22 10h11l9 7v3H22z" fill="#e0262c" />
+                        <rect x="25" y="12" width="7" height="5" fill="#0a1220" opacity="0.55" />
+                        <g class="wheel">
+                            <circle cx="10" cy="22" r="5" fill="#0a1220" />
+                            <circle cx="10" cy="22" r="2" fill="#7c8aa8" />
+                        </g>
+                        <g class="wheel">
+                            <circle cx="34" cy="22" r="5" fill="#0a1220" />
+                            <circle cx="34" cy="22" r="2" fill="#7c8aa8" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-row">
+            <span class="status-text dots">Yuklanmoqda</span>
+            <span class="percent" id="pct">0%</span>
+        </div>
+    </div>
+    <header class=" max-w-6xl mx-auto flex justify-between items-center pb-8 border-b border-card-border mb-8">
         <a href="/" class="text-2xl font-black tracking-wider text-brand">
             KARVON
         </a>
@@ -226,7 +276,7 @@
     </main>
 
     <script src="../js/pay.js"></script>
-
+    <script src="../js/scriptload.js"></script>
 </body>
 
 </html>

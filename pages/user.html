@@ -9,12 +9,62 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Iconlar -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link rel="stylesheet" href="../css/load.css">
+
     <link rel="icon" type="image/svg+xml" href="../images/image.png">
 </head>
 
 <body class="bg-[#0e0c0d] text-white font-sans antialiased flex flex-col min-h-screen">
+    <div class="stage">
+        <div class="grid"></div>
 
+        <div class="badge-wrap">
+            <div class="badge-ring"></div>
+            <div class="badge-ring spin"></div>
+            <div class="badge">
+                <svg viewBox="0 0 64 64" fill="none">
+                    <!-- Stilizlashtirilgan yuk mashinasi belgisi -->
+                    <rect x="6" y="26" width="30" height="16" rx="1.5" fill="#101a2e" />
+                    <path d="M36 30h10l8 8v4H36z" fill="#e0262c" />
+                    <rect x="8" y="30" width="22" height="3" fill="#f4f6fb" opacity="0.85" />
+                    <circle cx="18" cy="44" r="5" fill="#101a2e" />
+                    <circle cx="18" cy="44" r="2" fill="#f4f6fb" />
+                    <circle cx="44" cy="44" r="5" fill="#101a2e" />
+                    <circle cx="44" cy="44" r="2" fill="#f4f6fb" />
+                </svg>
+            </div>
+        </div>
+
+        <h1 class="wordmark">KAR<span>VON</span></h1>
+        <p class="tagline">Buyurtmalar xizmati</p>
+
+        <div class="road-wrap">
+            <div class="road">
+                <div class="road-line"></div>
+                <div class="progress-fill"></div>
+                <div class="truck">
+                    <svg viewBox="0 0 48 32" fill="none">
+                        <rect x="2" y="6" width="20" height="14" rx="1.2" fill="#f4f6fb" />
+                        <path d="M22 10h11l9 7v3H22z" fill="#e0262c" />
+                        <rect x="25" y="12" width="7" height="5" fill="#0a1220" opacity="0.55" />
+                        <g class="wheel">
+                            <circle cx="10" cy="22" r="5" fill="#0a1220" />
+                            <circle cx="10" cy="22" r="2" fill="#7c8aa8" />
+                        </g>
+                        <g class="wheel">
+                            <circle cx="34" cy="22" r="5" fill="#0a1220" />
+                            <circle cx="34" cy="22" r="2" fill="#7c8aa8" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-row">
+            <span class="status-text dots">Yuklanmoqda</span>
+            <span class="percent" id="pct">0%</span>
+        </div>
+    </div>
     <!-- HEADER -->
     <header class="border-b border-zinc-800 bg-[#0e0c0d]/90 backdrop-blur sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2 md:gap-4">
@@ -23,7 +73,7 @@
             <div class="flex items-center gap-8">
                 <a href="/" class="text-lg md:text-xl font-extrabold tracking-wider text-white">KARVON</a>
                 <nav class="hidden md:flex items-center gap-6 text-xs text-zinc-400 font-medium">
-                    <a href="#" class="hover:text-white transition">Katalog</a>
+                    <a href="./market.html" class="hover:text-white transition">Katalog</a>
                     <a href="#" class="hover:text-white transition">Aksiyalar</a>
                     <a href="#" class="hover:text-white transition">Yordam</a>
                 </nav>
@@ -240,7 +290,7 @@
 
                     </div>
                 </section>
-                
+
                 <section id="tab-saqlanganlar" class="tab-content hidden space-y-6">
                     <h2 class="text-xl font-bold">Saqlangan mahsulotlar</h2>
                     <div id="likes-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -405,6 +455,7 @@
     </footer>
 
     <script src="../js/user.js"></script>
+    <script src="../js/scriptload.js"></script>
 </body>
 
 </html>

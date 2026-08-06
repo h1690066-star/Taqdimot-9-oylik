@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Bot token (BotFather bergan) — sizniki allaqachon to'g'ri kiritilgan
     const TELEGRAM_BOT_TOKEN = "8693449444:AAE-plk4mlKvw6zSLrPbeXJzHBOgmn2x-us";
 
-    const TELEGRAM_CHAT_ID = "8423941481";
+    const TELEGRAM_CHAT_ID = "-1004464328458";
     // ============================================================
 
 
@@ -366,9 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Buyurtmani Telegram botga yuborish
                     sendOrderToTelegram(newOrder);
                 }
-                // ==========================================================================
-
-                // To'lov muvaffaqiyatli bo'lgach savat va checkout ma'lumotlarini tozalash
+                
                 localStorage.removeItem('karvon_cart');
                 localStorage.removeItem('karvon_checkout_total');
                 localStorage.removeItem('karvon_checkout_count');

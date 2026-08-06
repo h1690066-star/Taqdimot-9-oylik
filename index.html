@@ -8,14 +8,65 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="./images/image.png">
+    <link rel="stylesheet" href="./css/load.css">
 </head>
 
 <body class="bg-[#0e0c0d] text-white font-sans antialiased min-h-screen">
 
+    <div class="stage">
+        <div class="grid"></div>
+
+        <div class="badge-wrap">
+            <div class="badge-ring"></div>
+            <div class="badge-ring spin"></div>
+            <div class="badge">
+                <svg viewBox="0 0 64 64" fill="none">
+                    <!-- Stilizlashtirilgan yuk mashinasi belgisi -->
+                    <rect x="6" y="26" width="30" height="16" rx="1.5" fill="#101a2e" />
+                    <path d="M36 30h10l8 8v4H36z" fill="#e0262c" />
+                    <rect x="8" y="30" width="22" height="3" fill="#f4f6fb" opacity="0.85" />
+                    <circle cx="18" cy="44" r="5" fill="#101a2e" />
+                    <circle cx="18" cy="44" r="2" fill="#f4f6fb" />
+                    <circle cx="44" cy="44" r="5" fill="#101a2e" />
+                    <circle cx="44" cy="44" r="2" fill="#f4f6fb" />
+                </svg>
+            </div>
+        </div>
+
+        <h1 class="wordmark">KAR<span>VON</span></h1>
+        <p class="tagline">Buyurtmalar xizmati</p>
+
+        <div class="road-wrap">
+            <div class="road">
+                <div class="road-line"></div>
+                <div class="progress-fill"></div>
+                <div class="truck">
+                    <svg viewBox="0 0 48 32" fill="none">
+                        <rect x="2" y="6" width="20" height="14" rx="1.2" fill="#f4f6fb" />
+                        <path d="M22 10h11l9 7v3H22z" fill="#e0262c" />
+                        <rect x="25" y="12" width="7" height="5" fill="#0a1220" opacity="0.55" />
+                        <g class="wheel">
+                            <circle cx="10" cy="22" r="5" fill="#0a1220" />
+                            <circle cx="10" cy="22" r="2" fill="#7c8aa8" />
+                        </g>
+                        <g class="wheel">
+                            <circle cx="34" cy="22" r="5" fill="#0a1220" />
+                            <circle cx="34" cy="22" r="2" fill="#7c8aa8" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-row">
+            <span class="status-text dots">Yuklanmoqda</span>
+            <span class="percent" id="pct">0%</span>
+        </div>
+    </div>
+
     <header class="border-b border-zinc-800 bg-[#0e0c0d]/90 backdrop-blur sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3 md:gap-4">
 
-            <!-- Logo -->
             <div class="flex items-center gap-3 md:gap-6 order-1 relative">
                 <button id="btn-categories-mobile" onclick="toggleCategoryMenu(event)"
                     class="md:hidden flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white shrink-0"
@@ -336,11 +387,9 @@
 
         </div>
     </section>
-    <!-- AFZALLIKLAR / XIZMATLAR SECTION -->
     <section class="bg-[#0e0c0d] text-white py-10 sm:py-16 px-4 md:px-8 border-b border-zinc-900">
         <div class="max-w-6xl mx-auto space-y-10 sm:space-y-16">
 
-            <!-- 1-Blok: Til to'sig'i -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div class="space-y-3">
                     <h3 class="text-xl md:text-2xl font-bold tracking-tight">Til to'sig'i bormi?</h3>
@@ -357,7 +406,7 @@
                             <i class="fa-solid fa-globe"></i>
                         </div>
                         <span class="text-sm font-semibold tracking-wide text-zinc-200">O'zbek tilida 100%</span>
-                        <!-- Fon element bezagi -->
+
                         <div
                             class="absolute -bottom-6 -right-6 text-zinc-800/20 text-8xl font-black select-none pointer-events-none">
                             文
@@ -366,7 +415,6 @@
                 </div>
             </div>
 
-            <!-- 2-Blok: Logistika muammomi -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div class="order-2 md:order-1 flex justify-start">
                     <div
@@ -925,6 +973,7 @@
         </div>
     </footer>
     <script src="./js/mian.js"></script>
+    <script src="./js/scriptload.js"></script>
 </body>
 
 </html>
