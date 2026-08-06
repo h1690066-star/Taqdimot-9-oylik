@@ -57,7 +57,7 @@
 
 
 
-    <header class="border-b border-zinc-800 bg-[#0e0c0d]/90 backdrop-blur sticky top-0 z-50">
+    <header class="border-b border-zinc-800 bg-[#0e0c0d]/90 backdrop-blur fixed top-0 left-0 right-0 w-full z-50">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3 md:gap-4">
 
             <div class="flex items-center gap-3 md:gap-6 order-1 relative">
@@ -148,360 +148,372 @@
         </div>
     </header>
 
-    <section class="bg-[#0e0c0d] text-white py-8 sm:py-12 px-4 md:px-8 border-b border-zinc-900">
-        <div class="max-w-7xl mx-auto">
+    <!-- MAIN WRAPPER (HEADER OSTIDAN CHIQARISH UCHUN PT PADDING QO'SHILDI) -->
+    <main class="pt-28 sm:pt-32 md:pt-20">
 
-            <!-- MAIN HERO GRID (Matnlar va Xarita/Rasm) -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-10 sm:mb-16">
+        <section class="bg-[#0e0c0d] text-white py-8 sm:py-12 px-4 md:px-8 border-b border-zinc-900">
+            <div class="max-w-7xl mx-auto">
 
-                <!-- Chap taraf: Matnlar va Tugmalar -->
+                <!-- MAIN HERO GRID (Matnlar va Xarita/Rasm) -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-10 sm:mb-16">
+
+                    <!-- Chap taraf: Matnlar va Tugmalar -->
+                    <div class="space-y-6">
+
+                        <!-- Badge -->
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-950/40 border border-red-900/50 text-red-500 text-xs font-semibold tracking-wider uppercase">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span>Premium Logistika Xizmati</span>
+                        </div>
+
+                        <!-- Sarlavha -->
+                        <h1 class="text-2xl sm:text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                            Ipak Yo'lining <span class="text-amber-500">Zamonaviy</span> Reinkarnatsiyasi
+                        </h1>
+
+                        <!-- Tavsif matni -->
+                        <p class="text-zinc-400 text-sm md:text-base leading-relaxed max-w-xl">
+                            Xitoyning eng yirik bozorlaridan to'g'ridan-to'g'ri Tashkentdagi eshigingizgacha.
+                            Brokerlarsiz,
+                            ortiqcha to'lovlarsiz, kafolatlangan xavfsizlik.
+                        </p>
+
+                        <div
+                            class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 pt-2">
+                            <a href="./pages/market.html"
+                                class="w-full sm:w-auto px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold text-sm rounded-xl transition shadow-lg shadow-red-600/20">
+                                Xaridni boshlash
+                            </a>
+                            <a href="#kargo"
+                                class="w-full sm:w-auto px-6 py-3 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-amber-400 font-semibold text-sm rounded-xl transition">
+                                Kargo hisoblash
+                            </a>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-3 sm:gap-6 pt-6 sm:pt-8 border-t border-zinc-900">
+                            <div>
+                                <div class="text-base sm:text-xl md:text-2xl font-bold text-white">12-15</div>
+                                <div class="text-[10px] sm:text-xs text-zinc-500 mt-1">Kun yetkazib berish</div>
+                            </div>
+                            <div>
+                                <div class="text-base sm:text-xl md:text-2xl font-bold text-white">0%</div>
+                                <div class="text-[10px] sm:text-xs text-zinc-500 mt-1">Xufiyona to'lovlar</div>
+                            </div>
+                            <div>
+                                <div class="text-base sm:text-xl md:text-2xl font-bold text-white">24/7</div>
+                                <div class="text-[10px] sm:text-xs text-zinc-500 mt-1">Mijozlarni qo'llab-quvvatlash
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- O'ng taraf: Xarita / Rasm (Guangzhou -> Tashkent route) -->
+                    <div class="relative rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900/50 p-2 group">
+                        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=800&q=80"
+                            alt="Guangzhou to Tashkent Route Map"
+                            class="w-full h-[220px] sm:h-[300px] md:h-[380px] object-cover rounded-xl opacity-70 group-hover:opacity-90 transition duration-500 grayscale contrast-125" />
+                        <!-- Marshrut overlay vizualizatsiyasi -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[#0e0c0d] via-transparent to-transparent opacity-80 pointer-events-none">
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BO'LUVCHI CHIZIQ VA OLMAST MONOGRAMMA -->
+                <div class="relative my-12 flex items-center justify-center">
+                    <div class="w-full border-t border-zinc-800"></div>
+                    <div class="absolute bg-[#0e0c0d] px-4 text-amber-500 text-xs">
+                        ◆
+                    </div>
+                </div>
+
+                <!-- 4 TA KAFOLATLAR GRIDI -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+
+                    <!-- Card 1 -->
+                    <div
+                        class="bg-zinc-900/60 border border-zinc-800 p-4 rounded-xl flex items-center gap-4 hover:border-zinc-700 transition">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-red-950/40 border border-red-900/40 flex items-center justify-center text-red-500 shrink-0">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white">To'lov himoyasi</h4>
+                            <p class="text-xs text-zinc-500">Eskrou tizimi orqali</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div
+                        class="bg-zinc-900/60 border border-zinc-800 p-4 rounded-xl flex items-center gap-4 hover:border-zinc-700 transition">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-red-950/40 border border-red-900/40 flex items-center justify-center text-red-500 shrink-0">
+                            <i class="fa-solid fa-ribbon"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white">100% original</h4>
+                            <p class="text-xs text-zinc-500">Sifat nazorati</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div
+                        class="bg-zinc-900/60 border border-zinc-800 p-4 rounded-xl flex items-center gap-4 hover:border-zinc-700 transition">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-red-950/40 border border-red-900/40 flex items-center justify-center text-red-500 shrink-0">
+                            <i class="fa-solid fa-box-archive"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white">Pul qaytariladi</h4>
+                            <p class="text-xs text-zinc-500">Kafolatlangan yetkazuv</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div
+                        class="bg-zinc-900/60 border border-zinc-800 p-4 rounded-xl flex items-center gap-4 hover:border-zinc-700 transition">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-red-950/40 border border-red-900/40 flex items-center justify-center text-red-500 shrink-0">
+                            <i class="fa-solid fa-warehouse"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white">Toshkent ombori</h4>
+                            <p class="text-xs text-zinc-500">Mahalliy logistika</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- TO'G'RIDAN-TO'G'RI MANBALAR (PLATFORMALAR) SECTION -->
                 <div class="space-y-6">
+                    <h3 class="text-center text-lg font-bold text-white tracking-wide">To'g'ridan-to'g'ri Manbalar</h3>
 
-                    <!-- Badge -->
-                    <div
-                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-950/40 border border-red-900/50 text-red-500 text-xs font-semibold tracking-wider uppercase">
-                        <i class="fa-regular fa-circle-check"></i>
-                        <span>Premium Logistika Xizmati</span>
-                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                    <!-- Sarlavha -->
-                    <h1 class="text-2xl sm:text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                        Ipak Yo'lining <span class="text-amber-500">Zamonaviy</span> Reinkarnatsiyasi
-                    </h1>
-
-                    <!-- Tavsif matni -->
-                    <p class="text-zinc-400 text-sm md:text-base leading-relaxed max-w-xl">
-                        Xitoyning eng yirik bozorlaridan to'g'ridan-to'g'ri Tashkentdagi eshigingizgacha. Brokerlarsiz,
-                        ortiqcha to'lovlarsiz, kafolatlangan xavfsizlik.
-                    </p>
-
-                    <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 pt-2">
-                        <a href="./pages/market.html"
-                            class="w-full sm:w-auto px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold text-sm rounded-xl transition shadow-lg shadow-red-600/20">
-                            Xaridni boshlash
-                        </a>
-                        <a href="#kargo"
-                            class="w-full sm:w-auto px-6 py-3 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-amber-400 font-semibold text-sm rounded-xl transition">
-                            Kargo hisoblash
-                        </a>
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-3 sm:gap-6 pt-6 sm:pt-8 border-t border-zinc-900">
-                        <div>
-                            <div class="text-base sm:text-xl md:text-2xl font-bold text-white">12-15</div>
-                            <div class="text-[10px] sm:text-xs text-zinc-500 mt-1">Kun yetkazib berish</div>
-                        </div>
-                        <div>
-                            <div class="text-base sm:text-xl md:text-2xl font-bold text-white">0%</div>
-                            <div class="text-[10px] sm:text-xs text-zinc-500 mt-1">Xufiyona to'lovlar</div>
-                        </div>
-                        <div>
-                            <div class="text-base sm:text-xl md:text-2xl font-bold text-white">24/7</div>
-                            <div class="text-[10px] sm:text-xs text-zinc-500 mt-1">Mijozlarni qo'llab-quvvatlash</div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- O'ng taraf: Xarita / Rasm (Guangzhou -> Tashkent route) -->
-                <div class="relative rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900/50 p-2 group">
-                    <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=800&q=80"
-                        alt="Guangzhou to Tashkent Route Map"
-                        class="w-full h-[220px] sm:h-[300px] md:h-[380px] object-cover rounded-xl opacity-70 group-hover:opacity-90 transition duration-500 grayscale contrast-125" />
-                    <!-- Marshrut overlay vizualizatsiyasi -->
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-[#0e0c0d] via-transparent to-transparent opacity-80 pointer-events-none">
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- BO'LUVCHI CHIZIQ VA OLMAST MONOGRAMMA -->
-            <div class="relative my-12 flex items-center justify-center">
-                <div class="w-full border-t border-zinc-800"></div>
-                <div class="absolute bg-[#0e0c0d] px-4 text-amber-500 text-xs">
-                    ◆
-                </div>
-            </div>
-
-            <!-- 4 TA KAFOLATLAR GRIDI -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-
-                <!-- Card 1 -->
-                <div
-                    class="bg-zinc-900/60 border border-zinc-800 p-4 rounded-xl flex items-center gap-4 hover:border-zinc-700 transition">
-                    <div
-                        class="w-10 h-10 rounded-lg bg-red-950/40 border border-red-900/40 flex items-center justify-center text-red-500 shrink-0">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <div>
-                        <h4 class="text-sm font-semibold text-white">To'lov himoyasi</h4>
-                        <p class="text-xs text-zinc-500">Eskrou tizimi orqali</p>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div
-                    class="bg-zinc-900/60 border border-zinc-800 p-4 rounded-xl flex items-center gap-4 hover:border-zinc-700 transition">
-                    <div
-                        class="w-10 h-10 rounded-lg bg-red-950/40 border border-red-900/40 flex items-center justify-center text-red-500 shrink-0">
-                        <i class="fa-solid fa-ribbon"></i>
-                    </div>
-                    <div>
-                        <h4 class="text-sm font-semibold text-white">100% original</h4>
-                        <p class="text-xs text-zinc-500">Sifat nazorati</p>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div
-                    class="bg-zinc-900/60 border border-zinc-800 p-4 rounded-xl flex items-center gap-4 hover:border-zinc-700 transition">
-                    <div
-                        class="w-10 h-10 rounded-lg bg-red-950/40 border border-red-900/40 flex items-center justify-center text-red-500 shrink-0">
-                        <i class="fa-solid fa-box-archive"></i>
-                    </div>
-                    <div>
-                        <h4 class="text-sm font-semibold text-white">Pul qaytariladi</h4>
-                        <p class="text-xs text-zinc-500">Kafolatlangan yetkazuv</p>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div
-                    class="bg-zinc-900/60 border border-zinc-800 p-4 rounded-xl flex items-center gap-4 hover:border-zinc-700 transition">
-                    <div
-                        class="w-10 h-10 rounded-lg bg-red-950/40 border border-red-900/40 flex items-center justify-center text-red-500 shrink-0">
-                        <i class="fa-solid fa-warehouse"></i>
-                    </div>
-                    <div>
-                        <h4 class="text-sm font-semibold text-white">Toshkent ombori</h4>
-                        <p class="text-xs text-zinc-500">Mahalliy logistika</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- TO'G'RIDAN-TO'G'RI MANBALAR (PLATFORMALAR) SECTION -->
-            <div class="space-y-6">
-                <h3 class="text-center text-lg font-bold text-white tracking-wide">To'g'ridan-to'g'ri Manbalar</h3>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                    <!-- Taobao Card -->
-                    <div
-                        class="bg-zinc-900/80 border border-zinc-800/80 rounded-2xl p-5 flex flex-col justify-between hover:border-zinc-700 transition relative overflow-hidden">
-                        <div>
-                            <div
-                                class="w-10 h-10 rounded-xl bg-orange-600 text-white font-black text-lg flex items-center justify-center mb-4">
-                                淘
-                            </div>
-                            <h4 class="text-base font-bold text-white mb-1">Taobao</h4>
-                            <p class="text-xs text-zinc-400 mb-6">Chakana savdo uchun eng yirik maydon.</p>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center text-xs mb-2">
-                                <span class="text-zinc-500">Mavjud tovarlar:</span>
-                                <span class="text-white font-semibold">1 mird+</span>
-                            </div>
-                            <div class="w-full bg-zinc-800 h-1 rounded-full overflow-hidden">
-                                <div class="bg-orange-500 h-full w-[85%]"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pinduoduo Card -->
-                    <div
-                        class="bg-zinc-900/80 border border-zinc-800/80 rounded-2xl p-5 flex flex-col justify-between hover:border-zinc-700 transition relative overflow-hidden">
-                        <div>
-                            <div
-                                class="w-10 h-10 rounded-xl bg-red-600 text-white font-black text-lg flex items-center justify-center mb-4">
-                                拼
-                            </div>
-                            <h4 class="text-base font-bold text-white mb-1">Pinduoduo</h4>
-                            <p class="text-xs text-zinc-400 mb-6">Guruhli xaridlar orqali eng past narxlar.</p>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center text-xs mb-2">
-                                <span class="text-zinc-500">Arzonlik darajasi:</span>
-                                <span class="text-white font-semibold">Maksimal</span>
-                            </div>
-                            <div class="w-full bg-zinc-800 h-1 rounded-full overflow-hidden">
-                                <div class="bg-red-500 h-full w-[95%]"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 1688 Card -->
-                    <div
-                        class="bg-zinc-900/80 border border-zinc-800/80 rounded-2xl p-5 flex flex-col justify-between hover:border-zinc-700 transition relative overflow-hidden">
-                        <div>
-                            <div
-                                class="w-10 h-10 rounded-xl bg-amber-600 text-white font-black text-xs flex items-center justify-center mb-4">
-                                1688
-                            </div>
-                            <h4 class="text-base font-bold text-white mb-1">1688</h4>
-                            <p class="text-xs text-zinc-400 mb-6">Ulgurji narxlar va zavodlar bilan aloqa.</p>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center text-xs mb-2">
-                                <span class="text-zinc-500">MOQ:</span>
-                                <span class="text-white font-semibold">Kamida 2 dona</span>
-                            </div>
-                            <div class="w-full bg-zinc-800 h-1 rounded-full overflow-hidden">
-                                <div class="bg-amber-500 h-full w-[70%]"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Alibaba Card -->
-                    <div
-                        class="bg-zinc-900/80 border border-zinc-800/80 rounded-2xl p-5 flex flex-col justify-between hover:border-zinc-700 transition relative overflow-hidden">
-                        <div>
-                            <div
-                                class="w-10 h-10 rounded-xl bg-blue-600 text-white font-black text-lg flex items-center justify-center mb-4">
-                                A
-                            </div>
-                            <h4 class="text-base font-bold text-white mb-1">Alibaba</h4>
-                            <p class="text-xs text-zinc-400 mb-6">Xalqaro eksport va ishlab chiqarish.</p>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center text-xs mb-2">
-                                <span class="text-zinc-500">Global qamrov:</span>
-                                <span class="text-white font-semibold">Yuqori</span>
-                            </div>
-                            <div class="w-full bg-zinc-800 h-1 rounded-full overflow-hidden">
-                                <div class="bg-blue-500 h-full w-[90%]"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </section>
-    <section class="bg-[#0e0c0d] text-white py-10 sm:py-16 px-4 md:px-8 border-b border-zinc-900">
-        <div class="max-w-6xl mx-auto space-y-10 sm:space-y-16">
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div class="space-y-3">
-                    <h3 class="text-xl md:text-2xl font-bold tracking-tight">Til to'sig'i bormi?</h3>
-                    <p class="text-zinc-400 text-sm leading-relaxed max-w-md">
-                        Bizning avtomatik tarjimonimiz va o'zbek tilidagi qidiruv tizimimiz bilan Xitoy iyerogliflarini
-                        tushunish shart emas.
-                    </p>
-                </div>
-                <div class="flex justify-start md:justify-end">
-                    <div
-                        class="w-full max-w-xs bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-8 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:border-zinc-700 transition">
+                        <!-- Taobao Card -->
                         <div
-                            class="w-12 h-12 rounded-full bg-red-950/40 text-red-500 flex items-center justify-center text-xl mb-4">
-                            <i class="fa-solid fa-globe"></i>
+                            class="bg-zinc-900/80 border border-zinc-800/80 rounded-2xl p-5 flex flex-col justify-between hover:border-zinc-700 transition relative overflow-hidden">
+                            <div>
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-orange-600 text-white font-black text-lg flex items-center justify-center mb-4">
+                                    淘
+                                </div>
+                                <h4 class="text-base font-bold text-white mb-1">Taobao</h4>
+                                <p class="text-xs text-zinc-400 mb-6">Chakana savdo uchun eng yirik maydon.</p>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center text-xs mb-2">
+                                    <span class="text-zinc-500">Mavjud tovarlar:</span>
+                                    <span class="text-white font-semibold">1 mird+</span>
+                                </div>
+                                <div class="w-full bg-zinc-800 h-1 rounded-full overflow-hidden">
+                                    <div class="bg-orange-500 h-full w-[85%]"></div>
+                                </div>
+                            </div>
                         </div>
-                        <span class="text-sm font-semibold tracking-wide text-zinc-200">O'zbek tilida 100%</span>
 
+                        <!-- Pinduoduo Card -->
                         <div
-                            class="absolute -bottom-6 -right-6 text-zinc-800/20 text-8xl font-black select-none pointer-events-none">
-                            文
+                            class="bg-zinc-900/80 border border-zinc-800/80 rounded-2xl p-5 flex flex-col justify-between hover:border-zinc-700 transition relative overflow-hidden">
+                            <div>
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-red-600 text-white font-black text-lg flex items-center justify-center mb-4">
+                                    拼
+                                </div>
+                                <h4 class="text-base font-bold text-white mb-1">Pinduoduo</h4>
+                                <p class="text-xs text-zinc-400 mb-6">Guruhli xaridlar orqali eng past narxlar.</p>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center text-xs mb-2">
+                                    <span class="text-zinc-500">Arzonlik darajasi:</span>
+                                    <span class="text-white font-semibold">Maksimal</span>
+                                </div>
+                                <div class="w-full bg-zinc-800 h-1 rounded-full overflow-hidden">
+                                    <div class="bg-red-500 h-full w-[95%]"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 1688 Card -->
+                        <div
+                            class="bg-zinc-900/80 border border-zinc-800/80 rounded-2xl p-5 flex flex-col justify-between hover:border-zinc-700 transition relative overflow-hidden">
+                            <div>
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-amber-600 text-white font-black text-xs flex items-center justify-center mb-4">
+                                    1688
+                                </div>
+                                <h4 class="text-base font-bold text-white mb-1">1688</h4>
+                                <p class="text-xs text-zinc-400 mb-6">Ulgurji narxlar va zavodlar bilan aloqa.</p>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center text-xs mb-2">
+                                    <span class="text-zinc-500">MOQ:</span>
+                                    <span class="text-white font-semibold">Kamida 2 dona</span>
+                                </div>
+                                <div class="w-full bg-zinc-800 h-1 rounded-full overflow-hidden">
+                                    <div class="bg-amber-500 h-full w-[70%]"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Alibaba Card -->
+                        <div
+                            class="bg-zinc-900/80 border border-zinc-800/80 rounded-2xl p-5 flex flex-col justify-between hover:border-zinc-700 transition relative overflow-hidden">
+                            <div>
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-blue-600 text-white font-black text-lg flex items-center justify-center mb-4">
+                                    A
+                                </div>
+                                <h4 class="text-base font-bold text-white mb-1">Alibaba</h4>
+                                <p class="text-xs text-zinc-400 mb-6">Xalqaro eksport va ishlab chiqarish.</p>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center text-xs mb-2">
+                                    <span class="text-zinc-500">Global qamrov:</span>
+                                    <span class="text-white font-semibold">Yuqori</span>
+                                </div>
+                                <div class="w-full bg-zinc-800 h-1 rounded-full overflow-hidden">
+                                    <div class="bg-blue-500 h-full w-[90%]"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="bg-[#0e0c0d] text-white py-10 sm:py-16 px-4 md:px-8 border-b border-zinc-900">
+            <div class="max-w-6xl mx-auto space-y-10 sm:space-y-16">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-3">
+                        <h3 class="text-xl md:text-2xl font-bold tracking-tight">Til to'sig'i bormi?</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed max-w-md">
+                            Bizning avtomatik tarjimonimiz va o'zbek tilidagi qidiruv tizimimiz bilan Xitoy
+                            iyerogliflarini
+                            tushunish shart emas.
+                        </p>
+                    </div>
+                    <div class="flex justify-start md:justify-end">
+                        <div
+                            class="w-full max-w-xs bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-8 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:border-zinc-700 transition">
+                            <div
+                                class="w-12 h-12 rounded-full bg-red-950/40 text-red-500 flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                            <span class="text-sm font-semibold tracking-wide text-zinc-200">O'zbek tilida 100%</span>
+
+                            <div
+                                class="absolute -bottom-6 -right-6 text-zinc-800/20 text-8xl font-black select-none pointer-events-none">
+                                文
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div class="order-2 md:order-1 flex justify-start">
-                    <div
-                        class="w-full max-w-xs bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-8 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:border-zinc-700 transition">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="order-2 md:order-1 flex justify-start">
                         <div
-                            class="w-12 h-12 rounded-full bg-amber-950/40 text-amber-500 flex items-center justify-center text-xl mb-4">
-                            <i class="fa-solid fa-box-open"></i>
-                        </div>
-                        <span class="text-sm font-semibold tracking-wide text-zinc-200">Eshikkacha yetkazish</span>
-                        <!-- Fon element bezagi -->
-                        <div
-                            class="absolute -bottom-6 -left-6 text-zinc-800/20 text-8xl font-black select-none pointer-events-none">
-                            <i class="fa-solid fa-truck-fast"></i>
+                            class="w-full max-w-xs bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-8 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:border-zinc-700 transition">
+                            <div
+                                class="w-12 h-12 rounded-full bg-amber-950/40 text-amber-500 flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-box-open"></i>
+                            </div>
+                            <span class="text-sm font-semibold tracking-wide text-zinc-200">Eshikkacha yetkazish</span>
+                            <!-- Fon element bezagi -->
+                            <div
+                                class="absolute -bottom-6 -left-6 text-zinc-800/20 text-8xl font-black select-none pointer-events-none">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="order-1 md:order-2 space-y-3">
-                    <h3 class="text-xl md:text-2xl font-bold tracking-tight">Logistika muammomi?</h3>
-                    <p class="text-zinc-400 text-sm leading-relaxed max-w-md">
-                        Barcha bojxona hujjatlari va xalqaro tashuvlarni biz o'z zimmamizga olamiz. Siz faqat mahsulotni
-                        tanlaysiz.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="bg-[#0e0c0d] text-white py-12 px-4 md:px-8 border-b border-zinc-900">
-        <div class="max-w-7xl mx-auto">
-
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-lg font-bold">Kategoriyalar</h2>
-                <a href="./pages/market.html"
-                    class="text-amber-500 text-xs font-semibold flex items-center gap-1 hover:underline">
-                    Barchasini ko'rish <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                </a>
-            </div>
-
-            <!-- Kategoriya itemlari -->
-            <div id="category-grid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-8 gap-3">
-
-                <div data-category="Barchasi" onclick="setCategory(this)"
-                    class="category-item active bg-amber-500/10 border border-amber-500/50 text-amber-400 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer transition group">
-                    <i class="fa-solid fa-border-all text-lg group-hover:scale-110 transition"></i>
-                    <span class="text-xs font-medium">Barchasi</span>
-                </div>
-
-                <div data-category="Gadjetlar" onclick="setCategory(this)"
-                    class="category-item bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-zinc-700 transition group">
-                    <i class="fa-solid fa-mobile-screen text-amber-500 text-lg group-hover:scale-110 transition"></i>
-                    <span class="text-xs text-zinc-300 font-medium">Gadjetlar</span>
-                </div>
-
-                <div data-category="Kiyimlar" onclick="setCategory(this)"
-                    class="category-item bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-zinc-700 transition group">
-                    <i class="fa-solid fa-shirt text-amber-500 text-lg group-hover:scale-110 transition"></i>
-                    <span class="text-xs text-zinc-300 font-medium">Kiyimlar</span>
-                </div>
-
-                <div data-category="Mebel" onclick="setCategory(this)"
-                    class="category-item bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-zinc-700 transition group">
-                    <i class="fa-solid fa-couch text-amber-500 text-lg group-hover:scale-110 transition"></i>
-                    <span class="text-xs text-zinc-300 font-medium">Mebel</span>
-                </div>
-
-                <div data-category="Noutbuklar" onclick="setCategory(this)"
-                    class="category-item bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-zinc-700 transition group">
-                    <i class="fa-solid fa-laptop text-amber-500 text-lg group-hover:scale-110 transition"></i>
-                    <span class="text-xs text-zinc-300 font-medium">Noutbuklar</span>
-                </div>
-
-                <div data-category="Maishiy texnika" onclick="setCategory(this)"
-                    class="category-item bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-zinc-700 transition group">
-                    <i class="fa-solid fa-blender text-amber-500 text-lg group-hover:scale-110 transition"></i>
-                    <span class="text-xs text-zinc-300 font-medium">Maishiy texnika</span>
-                </div>
-
-                <div data-category="O'yinchoqlar" onclick="setCategory(this)"
-                    class="category-item bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-zinc-700 transition group">
-                    <i class="fa-solid fa-gamepad text-amber-500 text-lg group-hover:scale-110 transition"></i>
-                    <span class="text-xs text-zinc-300 font-medium">O'yinchoqlar</span>
-                </div>
-
-                <div data-category="Aksessuarlar" onclick="setCategory(this)"
-                    class="category-item bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-zinc-700 transition group">
-                    <i class="fa-solid fa-clock text-amber-500 text-lg group-hover:scale-110 transition"></i>
-                    <span class="text-xs text-zinc-300 font-medium">Aksessuarlar</span>
+                    <div class="order-1 md:order-2 space-y-3">
+                        <h3 class="text-xl md:text-2xl font-bold tracking-tight">Logistika muammomi?</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed max-w-md">
+                            Barcha bojxona hujjatlari va xalqaro tashuvlarni biz o'z zimmamizga olamiz. Siz faqat
+                            mahsulotni
+                            tanlaysiz.
+                        </p>
+                    </div>
                 </div>
 
             </div>
+        </section>
 
-        </div>
-    </section>
+        <section class="bg-[#0e0c0d] text-white py-12 px-4 md:px-8 border-b border-zinc-900">
+            <div class="max-w-7xl mx-auto">
+
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-lg font-bold">Kategoriyalar</h2>
+                    <a href="./pages/market.html"
+                        class="text-amber-500 text-xs font-semibold flex items-center gap-1 hover:underline">
+                        Barchasini ko'rish <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+
+                <!-- Kategoriya itemlari -->
+                <div id="category-grid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-8 gap-3">
+
+                    <div data-category="Barchasi" onclick="setCategory(this)"
+                        class="category-item active bg-amber-500/10 border border-amber-500/50 text-amber-400 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer transition group">
+                        <i class="fa-solid fa-border-all text-lg group-hover:scale-110 transition"></i>
+                        <span class="text-xs font-medium">Barchasi</span>
+                    </div>
+
+                    <div data-category="Gadjetlar" onclick="setCategory(this)"
+                        class="category-item bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-zinc-700 transition group">
+                        <i
+                            class="fa-solid fa-mobile-screen text-amber-500 text-lg group-hover:scale-110 transition"></i>
+                        <span class="text-xs text-zinc-300 font-medium">Gadjetlar</span>
+                    </div>
+
+                    <div data-category="Kiyimlar" onclick="setCategory(this)"
+                        class="category-item bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-zinc-700 transition group">
+                        <i class="fa-solid fa-shirt text-amber-500 text-lg group-hover:scale-110 transition"></i>
+                        <span class="text-xs text-zinc-300 font-medium">Kiyimlar</span>
+                    </div>
+
+                    <div data-category="Mebel" onclick="setCategory(this)"
+                        class="category-item bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-zinc-700 transition group">
+                        <i class="fa-solid fa-couch text-amber-500 text-lg group-hover:scale-110 transition"></i>
+                        <span class="text-xs text-zinc-300 font-medium">Mebel</span>
+                    </div>
+
+                    <div data-category="Noutbuklar" onclick="setCategory(this)"
+                        class="category-item bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-zinc-700 transition group">
+                        <i class="fa-solid fa-laptop text-amber-500 text-lg group-hover:scale-110 transition"></i>
+                        <span class="text-xs text-zinc-300 font-medium">Noutbuklar</span>
+                    </div>
+
+                    <div data-category="Maishiy texnika" onclick="setCategory(this)"
+                        class="category-item bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-zinc-700 transition group">
+                        <i class="fa-solid fa-blender text-amber-500 text-lg group-hover:scale-110 transition"></i>
+                        <span class="text-xs text-zinc-300 font-medium">Maishiy texnika</span>
+                    </div>
+
+                    <div data-category="O'yinchoqlar" onclick="setCategory(this)"
+                        class="category-item bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-zinc-700 transition group">
+                        <i class="fa-solid fa-gamepad text-amber-500 text-lg group-hover:scale-110 transition"></i>
+                        <span class="text-xs text-zinc-300 font-medium">O'yinchoqlar</span>
+                    </div>
+
+                    <div data-category="Aksessuarlar" onclick="setCategory(this)"
+                        class="category-item bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-zinc-700 transition group">
+                        <i class="fa-solid fa-clock text-amber-500 text-lg group-hover:scale-110 transition"></i>
+                        <span class="text-xs text-zinc-300 font-medium">Aksessuarlar</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
 
     <!-- OMMABOP MAHSULOTLAR SECTION -->
     <section class="bg-[#0e0c0d] text-white py-12 px-4 md:px-8">
