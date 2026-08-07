@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const code = promoInput.value.trim().toUpperCase();
 
-            if (code === 'SARDOR') {
+            if (code === 'PDP20' || code === 'SARDOR') {
                 const originalPrice = parseFloat(totalPriceEl.dataset.originalPrice);
                 const discountAmount = originalPrice * 0.20;
                 const finalPrice = originalPrice - discountAmount;
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="flex items-center space-x-2">
               <i class="fa-solid fa-gift text-brand text-base animate-bounce"></i>
               <div>
-                <span class="font-bold text-white tracking-wide">"SARDOR"</span>
+                <span class="font-bold text-white tracking-wide">"${code}"</span>
                 <span class="text-gray-400 block text-[10px]">qo'llanildi (20% bonus)</span>
               </div>
             </div>
@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Buyurtmani Telegram botga yuborish
                     sendOrderToTelegram(newOrder);
                 }
-                
+
                 localStorage.removeItem('karvon_cart');
                 localStorage.removeItem('karvon_checkout_total');
                 localStorage.removeItem('karvon_checkout_count');
