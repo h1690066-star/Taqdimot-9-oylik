@@ -230,15 +230,16 @@
             <div id="auth-content-area" class="space-y-6">
 
                 <section id="tab-asosiy" class="tab-content hidden space-y-6">
-                    <div class="flex items-center justify-between">
+                    <!-- Sarlavha va tugmalar: mobilda ustma-ust, sm dan boshlab yonma-yon -->
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                         <h2 class="text-xl font-bold text-white">Foydalanuvchi ma'lumotlari</h2>
-                        <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-2.5 flex-wrap">
                             <button onclick="openEditModal()"
-                                class="flex items-center gap-2 bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 text-amber-400 font-semibold text-xs px-4 py-2 rounded-xl transition">
+                                class="flex items-center gap-2 bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 text-amber-400 font-semibold text-xs px-4 py-2 rounded-xl transition whitespace-nowrap">
                                 <i class="fa-solid fa-pen-to-square"></i> Tahrirlash
                             </button>
                             <button onclick="deleteAccount()"
-                                class="flex items-center gap-2 bg-red-950/30 border border-red-900/50 hover:bg-red-600 hover:text-white text-red-500 font-semibold text-xs px-4 py-2 rounded-xl transition">
+                                class="flex items-center gap-2 bg-red-950/30 border border-red-900/50 hover:bg-red-600 hover:text-white text-red-500 font-semibold text-xs px-4 py-2 rounded-xl transition whitespace-nowrap">
                                 <i class="fa-solid fa-trash-can"></i> Hisobni o'chirish
                             </button>
                         </div>
