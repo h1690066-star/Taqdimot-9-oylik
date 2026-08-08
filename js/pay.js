@@ -185,8 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return isNaN(num) ? 0 : num;
     }
 
-    // Har xil mahsulot obyektlaridan kerakli maydonni topib olish
-    // (chunki savatdagi obyektlarda maydon nomlari turlicha bo'lishi mumkin: image/img/photo/src)
+
     function getItemImage(item) {
         return item.image || item.img || item.photo || item.picture || item.src || null;
     }

@@ -12,7 +12,7 @@ function fmt(n) {
     return Math.round(n).toLocaleString("uz-UZ") + " so'm";
 }
 
-function seedFrom(id, salt) {   
+function seedFrom(id, salt) {
     const x = Math.sin(id * 999 + salt) * 10000;
     return x - Math.floor(x);
 }
@@ -120,23 +120,41 @@ function renderPlatformTable(product) {
 
     rows.forEach((row) => {
         const isRecommended = row.key === cheapestRetail.key;
-        const isSource = row.key === product.platform;
 
         const rowEl = document.createElement("div");
+        // Mobil: vertikal kartochka (flex-col). sm va undan katta: 4 ustunli jadval qatori.
         rowEl.className =
-            "grid grid-cols-4 px-6 py-4 items-center text-sm border-b border-zinc-900/70 last:border-b-0" +
+            "flex flex-col gap-2.5 sm:grid sm:grid-cols-4 sm:gap-0 sm:items-center px-4 sm:px-6 py-4 text-sm border-b border-zinc-900/70 last:border-b-0" +
             (isRecommended ? " bg-amber-500/5" : "");
 
         rowEl.innerHTML = `
-      <div class="flex items-center gap-2.5">
-        <div class="w-7 h-7 rounded ${row.color} text-white text-[10px] flex items-center justify-center font-bold shrink-0">${row.icon}</div>
-        <span class="font-semibold text-zinc-200">${row.label}</span>
+      <div class="flex items-center justify-between gap-2.5">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div class="w-7 h-7 rounded ${row.color} text-white text-[10px] flex items-center justify-center font-bold shrink-0">${row.icon}</div>
+          <span class="font-semibold text-zinc-200 truncate">${row.label}</span>
+        </div>
+        <div class="sm:hidden shrink-0">
+          ${isRecommended
+                ? '<span class="bg-amber-500 text-black text-[10px] font-bold px-2.5 py-1 rounded-full whitespace-nowrap">SIZGA ENG MOS</span>'
+                : row.moq
+                    ? '<span class="text-zinc-600 text-[11px] whitespace-nowrap">*MOQ bor</span>'
+                    : ""}
+        </div>
       </div>
-      <div class="font-bold ${isRecommended ? "text-amber-400" : "text-white"}">
-        ${fmt(row.total)}${row.moq ? '<span class="text-zinc-500">*</span>' : ""}
+
+      <div class="flex items-center justify-between sm:block">
+        <span class="text-[10px] text-zinc-500 uppercase font-bold sm:hidden">Narx</span>
+        <span class="font-bold ${isRecommended ? "text-amber-400" : "text-white"}">
+          ${fmt(row.total)}${row.moq ? '<span class="text-zinc-500">*</span>' : ""}
+        </span>
       </div>
-      <div class="text-zinc-400 text-xs">${row.ship}</div>
-      <div>
+
+      <div class="flex items-center justify-between sm:block">
+        <span class="text-[10px] text-zinc-500 uppercase font-bold sm:hidden">Yetkazish</span>
+        <span class="text-zinc-400 text-xs">${row.ship}</span>
+      </div>
+
+      <div class="hidden sm:block">
         ${isRecommended
                 ? '<span class="bg-amber-500 text-black text-[10px] font-bold px-2.5 py-1 rounded-full">SIZGA ENG MOS</span>'
                 : row.moq
